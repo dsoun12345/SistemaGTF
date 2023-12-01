@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="proyectoconnect.MainPage"
+              BackgroundColor="#4B4949">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="Placeholder" Value="Ingrese Código o DNI" />
+                <Setter Property="PlaceholderColor" Value="#A9A9A9" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HeightRequest" Value="60" />
+            </Style>
+            <Style x:Key="ImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+            <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="WidthRequest" Value="70" />
+                <Setter Property="HeightRequest" Value="70" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <!-- Título en la parte superior -->
+                <Label Text="Realizar Búsqueda" Style="{StaticResource LabelStyle}" HorizontalOptions="CenterAndExpand" />
+
+                <!-- Espacio entre el título y los elementos siguientes -->
+                <BoxView HeightRequest="220" BackgroundColor="Transparent" />
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Entrada de búsqueda y botón de imagen en el primer Grid Row -->
+                    <Entry x:Name="BusquedaEntry" Style="{StaticResource EntryStyle}" WidthRequest="100" Grid.Row="0" Grid.Column="0" Margin="10,0,10,0" />
+                    <Image Source="barrassb.png" Style="{StaticResource ImageStyle}" Aspect="AspectFit" Grid.Row="0" Grid.Column="1"  Margin="0,0,10,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="EscanearCodigo_Clicked" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <!-- Botón "Buscar" en el segundo Grid Row -->
+                    <Button Text="Buscar" Clicked="BuscarDatos_Clicked" Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" Margin="55,10,0,0" />
+                </Grid>
+
+                <!-- ResultadoGrid ahora se encuentra en el StackLayout -->
+                <Grid x:Name="ResultadoGrid" Margin="20,40,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+
+                        <!-- Agrega más filas según sea necesario -->
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
