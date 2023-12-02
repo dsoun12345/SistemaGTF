@@ -30,7 +30,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al conectar a la base de datos: " + ex.Message);
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -84,7 +84,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el archivo 'hola.txt': " + ex.Message);
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -109,7 +109,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar o borrar el archivo: " + ex.Message);
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,58 +137,49 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 {
                     conexion.Open();
 
-                    // Diccionario para almacenar el estado de verificación para cada ID
-                    Dictionary<int, List<string>> idVerificacion = new Dictionary<int, List<string>>();
-
                     foreach (string registro in registros)
                     {
+                        // Divide el registro en campos utilizando la coma como separador
                         string[] campos = registro.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        // Inicializa la ID y la verificación
+                        int id = -1;
+                        string verificacion = "";
+
                         foreach (string campo in campos)
                         {
+                            // Divide cada campo en clave y valor
                             string[] parts = campo.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
-                            if (parts.Length == 2 && parts[0].Trim() == "ID")
+                            if (parts.Length == 2)
                             {
-                                // Obtiene la ID del registro
-                                int id = int.Parse(parts[1].Trim());
+                                // Obtiene la clave y el valor
+                                string clave = parts[0].Trim();
+                                string valor = parts[1].Trim();
 
-                                // Obtiene el valor de la verificación
-                                string[] verificacionParts = registro.Split(new string[] { "Verificación:" }, StringSplitOptions.RemoveEmptyEntries);
-                                if (verificacionParts.Length == 2)
+                                if (clave == "ID")
                                 {
-                                    // Excluye el punto y coma al final del valor
-                                    string verificacion = verificacionParts[1].Trim().TrimEnd(';');
-
-                                    // Actualiza el estado de verificación para esta ID
-                                    if (!idVerificacion.ContainsKey(id))
-                                    {
-                                        idVerificacion[id] = new List<string> { verificacion };
-                                    }
-                                    else
-                                    {
-                                        idVerificacion[id].Add(verificacion);
-                                    }
+                                    // Obtiene la ID del registro
+                                    id = int.Parse(valor);
+                                }
+                                else if (clave == "Verificación")
+                                {
+                                    // Obtiene el valor de la verificación
+                                    verificacion = valor.Trim().TrimEnd(';');
                                 }
                             }
                         }
-                    }
 
-                    // Itera a través de las IDs y actualiza la base de datos solo si todas las verificaciones son "ok"
-                    foreach (int id in idVerificacion.Keys)
-                    {
-                        // Actualiza la base de datos solo si todas las verificaciones son "ok"
-                        if (idVerificacion[id].All(v => v == "ok"))
-                        {
-                            ActualizarVerificacion(id, "ok", conexion);
-                        }
+                        // Actualiza la base de datos con la verificación obtenida
+                        ActualizarVerificacion(id, verificacion, conexion);
                     }
                 }
 
-                MessageBox.Show("Cambios guardados en la base de datos.");
+                MessageBox.Show("Actualización realizada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar los cambios: " + ex.Message);
+                MessageBox.Show($"Error al actualizar: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

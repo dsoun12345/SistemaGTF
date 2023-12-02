@@ -79,6 +79,7 @@
             this.dataGridView1.GridColor = System.Drawing.Color.SteelBlue;
             this.dataGridView1.Location = new System.Drawing.Point(29, 74);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
@@ -153,7 +154,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(144, 24);
             this.label4.TabIndex = 77;
-            this.label4.Text = "Razon Social:";
+            this.label4.Text = "Razón Social:";
             // 
             // button4
             // 
@@ -336,7 +337,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(217, 24);
             this.label12.TabIndex = 56;
-            this.label12.Text = "Telefono de Cliente:";
+            this.label12.Text = "Teléfono de Cliente:";
             // 
             // label11
             // 
@@ -346,7 +347,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(225, 24);
             this.label11.TabIndex = 55;
-            this.label11.Text = "Direccion de Cliente:";
+            this.label11.Text = "Dirección de Cliente:";
             // 
             // label10
             // 

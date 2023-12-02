@@ -89,6 +89,7 @@
             this.txtTrabajosPen.ForeColor = System.Drawing.Color.White;
             this.txtTrabajosPen.Location = new System.Drawing.Point(12, 138);
             this.txtTrabajosPen.Name = "txtTrabajosPen";
+            this.txtTrabajosPen.ReadOnly = true;
             this.txtTrabajosPen.Size = new System.Drawing.Size(1330, 686);
             this.txtTrabajosPen.TabIndex = 84;
             this.txtTrabajosPen.Text = "";

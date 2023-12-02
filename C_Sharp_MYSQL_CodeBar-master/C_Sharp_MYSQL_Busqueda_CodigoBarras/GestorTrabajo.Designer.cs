@@ -60,6 +60,7 @@
             this.txtboxDNI1.ForeColor = System.Drawing.Color.White;
             this.txtboxDNI1.Location = new System.Drawing.Point(326, 142);
             this.txtboxDNI1.Name = "txtboxDNI1";
+            this.txtboxDNI1.ReadOnly = true;
             this.txtboxDNI1.Size = new System.Drawing.Size(162, 33);
             this.txtboxDNI1.TabIndex = 40;
             this.txtboxDNI1.TextChanged += new System.EventHandler(this.txtboxDNI1_TextChanged);
@@ -141,6 +142,7 @@
             this.txtcodigo1.ForeColor = System.Drawing.Color.White;
             this.txtcodigo1.Location = new System.Drawing.Point(81, 200);
             this.txtcodigo1.Name = "txtcodigo1";
+            this.txtcodigo1.ReadOnly = true;
             this.txtcodigo1.Size = new System.Drawing.Size(300, 33);
             this.txtcodigo1.TabIndex = 34;
             this.txtcodigo1.TextChanged += new System.EventHandler(this.txtcodigo1_TextChanged);
@@ -152,6 +154,7 @@
             this.txttitulo.ForeColor = System.Drawing.Color.White;
             this.txttitulo.Location = new System.Drawing.Point(81, 105);
             this.txttitulo.Name = "txttitulo";
+            this.txttitulo.ReadOnly = true;
             this.txttitulo.Size = new System.Drawing.Size(300, 33);
             this.txttitulo.TabIndex = 33;
             // 
@@ -176,7 +179,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 28);
             this.label2.TabIndex = 31;
-            this.label2.Text = "Codigo:";
+            this.label2.Text = "Código:";
             // 
             // label1
             // 
@@ -185,9 +188,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Location = new System.Drawing.Point(76, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(300, 28);
+            this.label1.Size = new System.Drawing.Size(101, 28);
             this.label1.TabIndex = 30;
-            this.label1.Text = "Razon social o Nombres:";
+            this.label1.Text = "Cliente:";
             // 
             // txtFechaEntrega
             // 
@@ -196,6 +199,7 @@
             this.txtFechaEntrega.ForeColor = System.Drawing.Color.White;
             this.txtFechaEntrega.Location = new System.Drawing.Point(326, 83);
             this.txtFechaEntrega.Name = "txtFechaEntrega";
+            this.txtFechaEntrega.ReadOnly = true;
             this.txtFechaEntrega.Size = new System.Drawing.Size(162, 33);
             this.txtFechaEntrega.TabIndex = 41;
             // 
@@ -228,6 +232,7 @@
             this.txtboxRUC1.ForeColor = System.Drawing.Color.White;
             this.txtboxRUC1.Location = new System.Drawing.Point(326, 209);
             this.txtboxRUC1.Name = "txtboxRUC1";
+            this.txtboxRUC1.ReadOnly = true;
             this.txtboxRUC1.Size = new System.Drawing.Size(162, 33);
             this.txtboxRUC1.TabIndex = 44;
             // 
@@ -255,11 +260,11 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(306, 28);
+            this.label7.Location = new System.Drawing.Point(330, 28);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(441, 38);
             this.label7.TabIndex = 46;
-            this.label7.Text = "Generar Codigo de Trabajo";
+            this.label7.Text = "Generar Código de Trabajo";
             // 
             // groupBox1
             // 
@@ -274,7 +279,7 @@
             this.groupBox1.Controls.Add(this.picturecodigo);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(26, 109);
+            this.groupBox1.Location = new System.Drawing.Point(29, 108);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(461, 587);
             this.groupBox1.TabIndex = 47;
@@ -292,7 +297,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(546, 208);
+            this.groupBox2.Location = new System.Drawing.Point(549, 207);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(522, 416);
             this.groupBox2.TabIndex = 48;
@@ -308,6 +313,9 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label7);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "GestorTrabajo";
             this.Text = "GestorTrabajo";
             this.Load += new System.EventHandler(this.GestorTrabajo_Load);

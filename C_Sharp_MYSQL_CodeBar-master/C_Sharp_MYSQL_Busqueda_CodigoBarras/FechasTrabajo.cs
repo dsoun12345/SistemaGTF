@@ -33,7 +33,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al conectar a la base de datos: " + ex.Message);
+                MessageBox.Show("Error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -45,17 +45,24 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             string codigoDni = txtCodDni.Text;
             DateTime fechaInicio, fechaFin;
 
-            if (!DateTime.TryParseExact(txtFecIni.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fechaInicio) ||
-                !DateTime.TryParseExact(txtFecFin.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fechaFin))
+            if (!DateTime.TryParseExact(txtFecIni.Text, "dd/MM/yyyy", null, DateTimeStyles.None, out fechaInicio) ||
+                !DateTime.TryParseExact(txtFecFin.Text, "dd/MM/yyyy", null, DateTimeStyles.None, out fechaFin))
             {
-                MessageBox.Show("Por favor, ingrese fechas válidas en los campos de inicio y fin en el formato día/mes/año (por ejemplo, 22/10/2023).");
+                MessageBox.Show("Por favor, ingrese fechas válidas en los campos (por ejemplo, 22/10/2023).", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verificar que la fecha de inicio sea anterior a la fecha de fin
+            if (fechaInicio > fechaFin)
+            {
+                MessageBox.Show("La fecha de inicio debe ser anterior a la fecha de fin.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             string fechaInicioBD = fechaInicio.ToString("yyyy-MM-dd");
             string fechaFinBD = fechaFin.ToString("yyyy-MM-dd");
 
-            string consultaSQL = "SELECT fecha_entrega, descripcion FROM gestion_ventas " +
+            string consultaSQL = "SELECT fecha_entrega, nom_completos, telefono, descripcion FROM gestion_ventas " +
                       "WHERE (codigotarjeta = @codigoDni OR DNI = @codigoDni) " +
                       "AND fecha_entrega >= @fechaInicio AND fecha_entrega <= @fechaFin " +
                       "ORDER BY fecha_entrega ASC";
@@ -74,6 +81,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     while (reader.Read())
                     {
                         DateTime fechaEntrega = reader.GetDateTime("fecha_entrega");
+                        string nomCompletos = reader["nom_completos"].ToString();
+                        string telefono = reader["telefono"].ToString();
                         string descripcionSinFormato = reader["descripcion"].ToString();
 
                         string[] descripciones = descripcionSinFormato.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -84,11 +93,18 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             if (datos.Length >= 6)
                             {
                                 // Construir el registro y agregarlo a la lista
-                                string registro = $"{fechaEntrega.ToShortDateString()},{datos[0].Trim()},{datos[1].Trim()},{datos[2].Trim()},{datos[3].Trim()},{datos[4].Trim()},{datos[5].Trim()}";
+                                string registro = $"{fechaEntrega.ToShortDateString()},{nomCompletos},{telefono},{datos[0].Trim()},{datos[1].Trim()},{datos[2].Trim()},{datos[3].Trim()},{datos[4].Trim()},{datos[5].Trim()}";
                                 registrosEncontrados.Add(registro);
                             }
                         }
                     }
+                }
+
+                // Verificar si se encontraron registros
+                if (registrosEncontrados.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron registros en el rango de fechas especificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
                 // Mostrar los resultados en el RichTextBox
@@ -96,7 +112,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al obtener descripciones desde la base de datos: " + ex.Message);
+                MessageBox.Show("Error al obtener descripciones : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -110,7 +126,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             foreach (var registro in registros)
             {
                 string[] campos = registro.Split(',');
-                if (campos.Length >= 6)
+                if (campos.Length >= 8) // Actualizado para reflejar la inclusión de nom_completos y telefono
                 {
                     // Agregar título del registro
                     txtDescripcion1.SelectionFont = new Font("Century Gothic", 14, FontStyle.Bold);
@@ -121,15 +137,18 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     txtDescripcion1.SelectionFont = new Font("Courier New", 12, FontStyle.Regular);
 
                     txtDescripcion1.AppendText($"Fecha de Entrega: {campos[0].Trim()}\n");
-                    txtDescripcion1.AppendText($"Cantidad: {campos[1].Trim()}\n");
-                    txtDescripcion1.AppendText($"Descripción: {campos[2].Trim()}\n");
-                    txtDescripcion1.AppendText($"Tamaño de Corte: {campos[3].Trim()}\n");
-                    txtDescripcion1.AppendText($"Tipo de Corte: {campos[4].Trim()}\n");
-                    txtDescripcion1.AppendText($"Material: {campos[5].Trim()}\n");
-                    txtDescripcion1.AppendText($"Precio: {campos[6].Trim()}\n");
+                    txtDescripcion1.AppendText($"Nom Completos: {campos[1].Trim()}\n");
+                    txtDescripcion1.AppendText($"Teléfono: {campos[2].Trim()}\n");
+                    txtDescripcion1.AppendText($"Cantidad: {campos[3].Trim()}\n");
+                    txtDescripcion1.AppendText($"Descripción: {campos[4].Trim()}\n");
+                    txtDescripcion1.AppendText($"Tamaño de Corte: {campos[5].Trim()}\n");
+                    txtDescripcion1.AppendText($"Tipo de Corte: {campos[6].Trim()}\n");
+                    txtDescripcion1.AppendText($"Material: {campos[7].Trim()}\n");
+                    txtDescripcion1.AppendText($"Precio: {campos[8].Trim()}\n");
                     txtDescripcion1.AppendText("\n\n");
                 }
             }
+
         }
 
         private void FechasTrabajo_FormClosing(object sender, FormClosingEventArgs e)
@@ -142,12 +161,18 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private void FechasTrabajo_Load(object sender, EventArgs e)
         {
+            txtCodDni.Focus();
 
         }
 
         private void btnguardar0_Click(object sender, EventArgs e)
         {
             ObtenerDescripcionesDesdeDB();
+            txtCodDni.Clear();
+            txtFecIni.Clear();
+            txtFecFin.Clear();
+            txtCodDni.Focus();
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

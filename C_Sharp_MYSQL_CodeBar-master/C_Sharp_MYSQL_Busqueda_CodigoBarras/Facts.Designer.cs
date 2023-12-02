@@ -164,6 +164,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btndescuentos0 = new System.Windows.Forms.Button();
             this.btnGenerarVaucher = new System.Windows.Forms.Button();
+            this.btnactualizar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -175,7 +176,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label18.Location = new System.Drawing.Point(575, 16);
+            this.label18.Location = new System.Drawing.Point(524, 13);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(328, 44);
             this.label18.TabIndex = 20;
@@ -186,7 +187,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(17, 22);
+            this.label1.Location = new System.Drawing.Point(82, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 19);
             this.label1.TabIndex = 21;
@@ -201,7 +202,7 @@
             this.cbotipop.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbotipop.ForeColor = System.Drawing.Color.White;
             this.cbotipop.FormattingEnabled = true;
-            this.cbotipop.Location = new System.Drawing.Point(149, 19);
+            this.cbotipop.Location = new System.Drawing.Point(214, 22);
             this.cbotipop.Name = "cbotipop";
             this.cbotipop.Size = new System.Drawing.Size(194, 28);
             this.cbotipop.TabIndex = 22;
@@ -216,7 +217,7 @@
             this.cboFtPr.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboFtPr.ForeColor = System.Drawing.Color.White;
             this.cboFtPr.FormattingEnabled = true;
-            this.cboFtPr.Location = new System.Drawing.Point(1242, 22);
+            this.cboFtPr.Location = new System.Drawing.Point(1246, 22);
             this.cboFtPr.Name = "cboFtPr";
             this.cboFtPr.Size = new System.Drawing.Size(116, 28);
             this.cboFtPr.TabIndex = 23;
@@ -227,11 +228,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(22, 28);
+            this.label2.Location = new System.Drawing.Point(19, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 19);
             this.label2.TabIndex = 24;
-            this.label2.Text = "Codigo:";
+            this.label2.Text = "Código:";
             this.label2.Visible = false;
             // 
             // label3
@@ -241,9 +242,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label3.Location = new System.Drawing.Point(19, 69);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(197, 19);
+            this.label3.Size = new System.Drawing.Size(67, 19);
             this.label3.TabIndex = 25;
-            this.label3.Text = "Razon social o Nombres:";
+            this.label3.Text = "Cliente:";
             this.label3.Visible = false;
             // 
             // label4
@@ -255,7 +256,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 19);
             this.label4.TabIndex = 28;
-            this.label4.Text = "Telefono:";
+            this.label4.Text = "Teléfono:";
             this.label4.Visible = false;
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
@@ -280,7 +281,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 19);
             this.label6.TabIndex = 33;
-            this.label6.Text = "Direccion:";
+            this.label6.Text = "Dirección:";
             this.label6.Visible = false;
             // 
             // txtBoxNoCom
@@ -288,9 +289,9 @@
             this.txtBoxNoCom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxNoCom.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxNoCom.ForeColor = System.Drawing.Color.White;
-            this.txtBoxNoCom.Location = new System.Drawing.Point(222, 69);
+            this.txtBoxNoCom.Location = new System.Drawing.Point(114, 69);
             this.txtBoxNoCom.Name = "txtBoxNoCom";
-            this.txtBoxNoCom.Size = new System.Drawing.Size(308, 26);
+            this.txtBoxNoCom.Size = new System.Drawing.Size(416, 26);
             this.txtBoxNoCom.TabIndex = 34;
             this.txtBoxNoCom.Visible = false;
             this.txtBoxNoCom.TextChanged += new System.EventHandler(this.txtBoxNoCom_TextChanged);
@@ -316,6 +317,7 @@
             this.txtBoxTelef.Size = new System.Drawing.Size(168, 26);
             this.txtBoxTelef.TabIndex = 36;
             this.txtBoxTelef.Visible = false;
+            this.txtBoxTelef.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxTelef_KeyPress);
             // 
             // txtBoxDirec
             // 
@@ -371,7 +373,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(119, 23);
             this.label9.TabIndex = 41;
-            this.label9.Text = "Descripcion";
+            this.label9.Text = "Descripción";
             // 
             // label10
             // 
@@ -416,6 +418,7 @@
             this.txtBoxcant1.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant1.TabIndex = 45;
             this.txtBoxcant1.Visible = false;
+            this.txtBoxcant1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant1_KeyPress);
             // 
             // txtBoxcant2
             // 
@@ -427,6 +430,7 @@
             this.txtBoxcant2.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant2.TabIndex = 46;
             this.txtBoxcant2.Visible = false;
+            this.txtBoxcant2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant2_KeyPress);
             // 
             // txtBoxcant3
             // 
@@ -438,6 +442,7 @@
             this.txtBoxcant3.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant3.TabIndex = 47;
             this.txtBoxcant3.Visible = false;
+            this.txtBoxcant3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant3_KeyPress);
             // 
             // txtBoxcant4
             // 
@@ -449,6 +454,7 @@
             this.txtBoxcant4.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant4.TabIndex = 48;
             this.txtBoxcant4.Visible = false;
+            this.txtBoxcant4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant4_KeyPress);
             // 
             // txtBoxcant5
             // 
@@ -460,6 +466,7 @@
             this.txtBoxcant5.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant5.TabIndex = 49;
             this.txtBoxcant5.Visible = false;
+            this.txtBoxcant5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant5_KeyPress);
             // 
             // txtBoxcant6
             // 
@@ -471,6 +478,7 @@
             this.txtBoxcant6.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant6.TabIndex = 50;
             this.txtBoxcant6.Visible = false;
+            this.txtBoxcant6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant6_KeyPress);
             // 
             // txtBoxcant8
             // 
@@ -482,6 +490,7 @@
             this.txtBoxcant8.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant8.TabIndex = 52;
             this.txtBoxcant8.Visible = false;
+            this.txtBoxcant8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant8_KeyPress);
             // 
             // txtBoxcant9
             // 
@@ -493,6 +502,7 @@
             this.txtBoxcant9.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant9.TabIndex = 53;
             this.txtBoxcant9.Visible = false;
+            this.txtBoxcant9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant9_KeyPress);
             // 
             // txtBoxcant0
             // 
@@ -503,6 +513,7 @@
             this.txtBoxcant0.Name = "txtBoxcant0";
             this.txtBoxcant0.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant0.TabIndex = 54;
+            this.txtBoxcant0.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant0_KeyPress);
             // 
             // txtBoxdes0
             // 
@@ -762,15 +773,16 @@
             this.txtBoxcant7.Size = new System.Drawing.Size(53, 31);
             this.txtBoxcant7.TabIndex = 77;
             this.txtBoxcant7.Visible = false;
+            this.txtBoxcant7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcant7_KeyPress);
             // 
             // txtBoxcorpe0
             // 
             this.txtBoxcorpe0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe0.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe0.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe0.Location = new System.Drawing.Point(913, 283);
+            this.txtBoxcorpe0.Location = new System.Drawing.Point(912, 281);
             this.txtBoxcorpe0.Name = "txtBoxcorpe0";
-            this.txtBoxcorpe0.Size = new System.Drawing.Size(130, 31);
+            this.txtBoxcorpe0.Size = new System.Drawing.Size(131, 31);
             this.txtBoxcorpe0.TabIndex = 78;
             this.txtBoxcorpe0.Visible = false;
             // 
@@ -847,7 +859,7 @@
             this.txtBoxcorpe1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe1.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe1.Location = new System.Drawing.Point(913, 325);
+            this.txtBoxcorpe1.Location = new System.Drawing.Point(913, 323);
             this.txtBoxcorpe1.Name = "txtBoxcorpe1";
             this.txtBoxcorpe1.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe1.TabIndex = 84;
@@ -986,7 +998,7 @@
             this.txtBoxcorpe2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe2.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe2.Location = new System.Drawing.Point(913, 367);
+            this.txtBoxcorpe2.Location = new System.Drawing.Point(913, 366);
             this.txtBoxcorpe2.Name = "txtBoxcorpe2";
             this.txtBoxcorpe2.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe2.TabIndex = 93;
@@ -999,7 +1011,7 @@
             this.txtBoxcorpe3.ForeColor = System.Drawing.Color.White;
             this.txtBoxcorpe3.Location = new System.Drawing.Point(913, 409);
             this.txtBoxcorpe3.Name = "txtBoxcorpe3";
-            this.txtBoxcorpe3.Size = new System.Drawing.Size(130, 31);
+            this.txtBoxcorpe3.Size = new System.Drawing.Size(131, 31);
             this.txtBoxcorpe3.TabIndex = 94;
             this.txtBoxcorpe3.Visible = false;
             // 
@@ -1008,7 +1020,7 @@
             this.txtBoxcorpe4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe4.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe4.Location = new System.Drawing.Point(913, 451);
+            this.txtBoxcorpe4.Location = new System.Drawing.Point(913, 450);
             this.txtBoxcorpe4.Name = "txtBoxcorpe4";
             this.txtBoxcorpe4.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe4.TabIndex = 95;
@@ -1019,7 +1031,7 @@
             this.txtBoxcorpe5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe5.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe5.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe5.Location = new System.Drawing.Point(913, 493);
+            this.txtBoxcorpe5.Location = new System.Drawing.Point(913, 491);
             this.txtBoxcorpe5.Name = "txtBoxcorpe5";
             this.txtBoxcorpe5.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe5.TabIndex = 96;
@@ -1031,7 +1043,7 @@
             this.txtBoxcorpe6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe6.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe6.Location = new System.Drawing.Point(913, 535);
+            this.txtBoxcorpe6.Location = new System.Drawing.Point(913, 536);
             this.txtBoxcorpe6.Name = "txtBoxcorpe6";
             this.txtBoxcorpe6.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe6.TabIndex = 97;
@@ -1053,7 +1065,7 @@
             this.txtBoxcorpe8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe8.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe8.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe8.Location = new System.Drawing.Point(913, 619);
+            this.txtBoxcorpe8.Location = new System.Drawing.Point(913, 617);
             this.txtBoxcorpe8.Name = "txtBoxcorpe8";
             this.txtBoxcorpe8.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe8.TabIndex = 99;
@@ -1065,7 +1077,7 @@
             this.txtBoxcorpe9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcorpe9.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcorpe9.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcorpe9.Location = new System.Drawing.Point(913, 661);
+            this.txtBoxcorpe9.Location = new System.Drawing.Point(913, 662);
             this.txtBoxcorpe9.Name = "txtBoxcorpe9";
             this.txtBoxcorpe9.Size = new System.Drawing.Size(130, 31);
             this.txtBoxcorpe9.TabIndex = 100;
@@ -1358,7 +1370,6 @@
             this.txtBoxdescu.ForeColor = System.Drawing.Color.White;
             this.txtBoxdescu.Location = new System.Drawing.Point(835, 108);
             this.txtBoxdescu.Name = "txtBoxdescu";
-            this.txtBoxdescu.ReadOnly = true;
             this.txtBoxdescu.Size = new System.Drawing.Size(58, 26);
             this.txtBoxdescu.TabIndex = 122;
             this.txtBoxdescu.Visible = false;
@@ -1369,13 +1380,15 @@
             this.txtBoxcodi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtBoxcodi.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxcodi.ForeColor = System.Drawing.Color.White;
-            this.txtBoxcodi.Location = new System.Drawing.Point(96, 26);
+            this.txtBoxcodi.Location = new System.Drawing.Point(114, 28);
             this.txtBoxcodi.Name = "txtBoxcodi";
             this.txtBoxcodi.Size = new System.Drawing.Size(290, 26);
             this.txtBoxcodi.TabIndex = 123;
             this.txtBoxcodi.Visible = false;
             this.txtBoxcodi.TextChanged += new System.EventHandler(this.txtBoxcodi_TextChanged);
+            this.txtBoxcodi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBoxcodi_KeyDown);
             this.txtBoxcodi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxcodi_KeyPress);
+            this.txtBoxcodi.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBoxcodi_KeyUp);
             // 
             // label16
             // 
@@ -1398,6 +1411,8 @@
             this.txtBoxprecio0.Size = new System.Drawing.Size(64, 31);
             this.txtBoxprecio0.TabIndex = 125;
             this.txtBoxprecio0.TextChanged += new System.EventHandler(this.txtBoxprecio0_TextChanged);
+            this.txtBoxprecio0.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBoxprecio0_KeyDown);
+            this.txtBoxprecio0.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio0_KeyPress);
             // 
             // txtBoxprecio1
             // 
@@ -1410,6 +1425,7 @@
             this.txtBoxprecio1.TabIndex = 126;
             this.txtBoxprecio1.Visible = false;
             this.txtBoxprecio1.TextChanged += new System.EventHandler(this.txtBoxprecio1_TextChanged);
+            this.txtBoxprecio1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio1_KeyPress);
             // 
             // txtBoxprecio2
             // 
@@ -1422,6 +1438,7 @@
             this.txtBoxprecio2.TabIndex = 127;
             this.txtBoxprecio2.Visible = false;
             this.txtBoxprecio2.TextChanged += new System.EventHandler(this.txtBoxprecio2_TextChanged);
+            this.txtBoxprecio2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio2_KeyPress);
             // 
             // txtBoxprecio3
             // 
@@ -1434,6 +1451,7 @@
             this.txtBoxprecio3.TabIndex = 128;
             this.txtBoxprecio3.Visible = false;
             this.txtBoxprecio3.TextChanged += new System.EventHandler(this.txtBoxprecio3_TextChanged);
+            this.txtBoxprecio3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio3_KeyPress);
             // 
             // txtBoxprecio4
             // 
@@ -1446,6 +1464,7 @@
             this.txtBoxprecio4.TabIndex = 129;
             this.txtBoxprecio4.Visible = false;
             this.txtBoxprecio4.TextChanged += new System.EventHandler(this.txtBoxprecio4_TextChanged);
+            this.txtBoxprecio4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio4_KeyPress);
             // 
             // txtBoxprecio5
             // 
@@ -1458,6 +1477,7 @@
             this.txtBoxprecio5.TabIndex = 130;
             this.txtBoxprecio5.Visible = false;
             this.txtBoxprecio5.TextChanged += new System.EventHandler(this.txtBoxprecio5_TextChanged);
+            this.txtBoxprecio5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio5_KeyPress);
             // 
             // txtBoxprecio6
             // 
@@ -1470,6 +1490,7 @@
             this.txtBoxprecio6.TabIndex = 131;
             this.txtBoxprecio6.Visible = false;
             this.txtBoxprecio6.TextChanged += new System.EventHandler(this.txtBoxprecio6_TextChanged);
+            this.txtBoxprecio6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio6_KeyPress);
             // 
             // txtBoxprecio7
             // 
@@ -1482,6 +1503,7 @@
             this.txtBoxprecio7.TabIndex = 132;
             this.txtBoxprecio7.Visible = false;
             this.txtBoxprecio7.TextChanged += new System.EventHandler(this.txtBoxprecio7_TextChanged);
+            this.txtBoxprecio7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio7_KeyPress);
             // 
             // txtBoxprecio8
             // 
@@ -1494,6 +1516,7 @@
             this.txtBoxprecio8.TabIndex = 133;
             this.txtBoxprecio8.Visible = false;
             this.txtBoxprecio8.TextChanged += new System.EventHandler(this.txtBoxprecio8_TextChanged);
+            this.txtBoxprecio8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio8_KeyPress);
             // 
             // txtBoxprecio9
             // 
@@ -1505,6 +1528,8 @@
             this.txtBoxprecio9.Size = new System.Drawing.Size(64, 31);
             this.txtBoxprecio9.TabIndex = 134;
             this.txtBoxprecio9.Visible = false;
+            this.txtBoxprecio9.TextChanged += new System.EventHandler(this.txtBoxprecio9_TextChanged);
+            this.txtBoxprecio9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxprecio9_KeyPress);
             // 
             // label17
             // 
@@ -1524,7 +1549,6 @@
             this.txtBoxfefac.ForeColor = System.Drawing.Color.White;
             this.txtBoxfefac.Location = new System.Drawing.Point(175, 19);
             this.txtBoxfefac.Name = "txtBoxfefac";
-            this.txtBoxfefac.ReadOnly = true;
             this.txtBoxfefac.Size = new System.Drawing.Size(97, 27);
             this.txtBoxfefac.TabIndex = 136;
             this.txtBoxfefac.TextChanged += new System.EventHandler(this.txtBoxfefac_TextChanged);
@@ -1575,7 +1599,6 @@
             this.txtBoxfepago.ForeColor = System.Drawing.Color.White;
             this.txtBoxfepago.Location = new System.Drawing.Point(453, 19);
             this.txtBoxfepago.Name = "txtBoxfepago";
-            this.txtBoxfepago.ReadOnly = true;
             this.txtBoxfepago.Size = new System.Drawing.Size(97, 27);
             this.txtBoxfepago.TabIndex = 140;
             // 
@@ -1584,7 +1607,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label21.Location = new System.Drawing.Point(20, 16);
+            this.label21.Location = new System.Drawing.Point(13, 18);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(112, 36);
             this.label21.TabIndex = 141;
@@ -1596,7 +1619,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label22.Location = new System.Drawing.Point(23, 16);
+            this.label22.Location = new System.Drawing.Point(65, 15);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(121, 36);
             this.label22.TabIndex = 142;
@@ -1653,6 +1676,7 @@
             this.txtBoxRecibido.Size = new System.Drawing.Size(166, 27);
             this.txtBoxRecibido.TabIndex = 152;
             this.txtBoxRecibido.TextChanged += new System.EventHandler(this.txtBoxRecibido_TextChanged);
+            this.txtBoxRecibido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxRecibido_KeyPress);
             // 
             // label25
             // 
@@ -1845,13 +1869,30 @@
             this.btnGenerarVaucher.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGenerarVaucher.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerarVaucher.Image")));
             this.btnGenerarVaucher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGenerarVaucher.Location = new System.Drawing.Point(982, 12);
+            this.btnGenerarVaucher.Location = new System.Drawing.Point(1025, 10);
             this.btnGenerarVaucher.Name = "btnGenerarVaucher";
-            this.btnGenerarVaucher.Size = new System.Drawing.Size(184, 52);
+            this.btnGenerarVaucher.Size = new System.Drawing.Size(177, 52);
             this.btnGenerarVaucher.TabIndex = 152;
             this.btnGenerarVaucher.Text = "Imprimir";
             this.btnGenerarVaucher.UseVisualStyleBackColor = false;
             this.btnGenerarVaucher.Click += new System.EventHandler(this.btnGenerarVaucher_Click);
+            // 
+            // btnactualizar
+            // 
+            this.btnactualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnactualizar.FlatAppearance.BorderSize = 0;
+            this.btnactualizar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnactualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnactualizar.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnactualizar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnactualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnactualizar.Image")));
+            this.btnactualizar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnactualizar.Location = new System.Drawing.Point(22, 13);
+            this.btnactualizar.Name = "btnactualizar";
+            this.btnactualizar.Size = new System.Drawing.Size(44, 48);
+            this.btnactualizar.TabIndex = 153;
+            this.btnactualizar.UseVisualStyleBackColor = false;
+            this.btnactualizar.Click += new System.EventHandler(this.btnactualizar_Click);
             // 
             // Facts
             // 
@@ -1859,6 +1900,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1370, 885);
+            this.Controls.Add(this.btnactualizar);
             this.Controls.Add(this.btnGenerarVaucher);
             this.Controls.Add(this.btndescuentos0);
             this.Controls.Add(this.groupBox4);
@@ -2104,5 +2146,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button btndescuentos0;
         private System.Windows.Forms.Button btnGenerarVaucher;
+        private System.Windows.Forms.Button btnactualizar;
     }
 }

@@ -49,18 +49,18 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label18.Location = new System.Drawing.Point(531, 112);
+            this.label18.Location = new System.Drawing.Point(551, 112);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(274, 44);
             this.label18.TabIndex = 21;
-            this.label18.Text = "Configuracion";
+            this.label18.Text = "Configuración";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(27, 66);
+            this.label1.Location = new System.Drawing.Point(40, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(243, 28);
             this.label1.TabIndex = 22;
@@ -71,7 +71,7 @@
             this.txtigv1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtigv1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtigv1.ForeColor = System.Drawing.Color.White;
-            this.txtigv1.Location = new System.Drawing.Point(336, 64);
+            this.txtigv1.Location = new System.Drawing.Point(349, 65);
             this.txtigv1.Name = "txtigv1";
             this.txtigv1.Size = new System.Drawing.Size(180, 27);
             this.txtigv1.TabIndex = 23;
@@ -87,11 +87,11 @@
             this.btnguard1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnguard1.Image = ((System.Drawing.Image)(resources.GetObject("btnguard1.Image")));
             this.btnguard1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnguard1.Location = new System.Drawing.Point(383, 612);
+            this.btnguard1.Location = new System.Drawing.Point(403, 612);
             this.btnguard1.Name = "btnguard1";
             this.btnguard1.Size = new System.Drawing.Size(251, 98);
             this.btnguard1.TabIndex = 81;
-            this.btnguard1.Text = "Guardar Configuracion";
+            this.btnguard1.Text = "Guardar Configuración";
             this.btnguard1.UseVisualStyleBackColor = false;
             this.btnguard1.Click += new System.EventHandler(this.btnguard1_Click);
             // 
@@ -100,7 +100,7 @@
             this.txtigvbd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtigvbd.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtigvbd.ForeColor = System.Drawing.Color.White;
-            this.txtigvbd.Location = new System.Drawing.Point(336, 137);
+            this.txtigvbd.Location = new System.Drawing.Point(349, 138);
             this.txtigvbd.Name = "txtigvbd";
             this.txtigvbd.Size = new System.Drawing.Size(180, 27);
             this.txtigvbd.TabIndex = 83;
@@ -110,7 +110,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(27, 139);
+            this.label2.Location = new System.Drawing.Point(40, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 28);
             this.label2.TabIndex = 84;
@@ -126,11 +126,11 @@
             this.btnborrar1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnborrar1.Image = ((System.Drawing.Image)(resources.GetObject("btnborrar1.Image")));
             this.btnborrar1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnborrar1.Location = new System.Drawing.Point(734, 612);
+            this.btnborrar1.Location = new System.Drawing.Point(754, 612);
             this.btnborrar1.Name = "btnborrar1";
             this.btnborrar1.Size = new System.Drawing.Size(226, 98);
             this.btnborrar1.TabIndex = 85;
-            this.btnborrar1.Text = "Borrar Configuracion";
+            this.btnborrar1.Text = "Borrar Configuración";
             this.btnborrar1.UseVisualStyleBackColor = false;
             this.btnborrar1.Click += new System.EventHandler(this.btnborrar1_Click);
             // 
@@ -146,7 +146,7 @@
             this.groupBox1.Controls.Add(this.txtigvbd);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.Location = new System.Drawing.Point(383, 228);
+            this.groupBox1.Location = new System.Drawing.Point(403, 213);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(577, 359);
             this.groupBox1.TabIndex = 86;
@@ -158,7 +158,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(27, 284);
+            this.label4.Location = new System.Drawing.Point(40, 285);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 28);
             this.label4.TabIndex = 87;
@@ -169,7 +169,7 @@
             this.txtpuntosvalor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtpuntosvalor.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtpuntosvalor.ForeColor = System.Drawing.Color.White;
-            this.txtpuntosvalor.Location = new System.Drawing.Point(336, 282);
+            this.txtpuntosvalor.Location = new System.Drawing.Point(349, 284);
             this.txtpuntosvalor.Name = "txtpuntosvalor";
             this.txtpuntosvalor.Size = new System.Drawing.Size(180, 27);
             this.txtpuntosvalor.TabIndex = 88;
@@ -179,7 +179,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(27, 206);
+            this.label3.Location = new System.Drawing.Point(40, 211);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(270, 28);
             this.label3.TabIndex = 86;
@@ -190,7 +190,7 @@
             this.txtpunto100.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtpunto100.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtpunto100.ForeColor = System.Drawing.Color.White;
-            this.txtpunto100.Location = new System.Drawing.Point(336, 204);
+            this.txtpunto100.Location = new System.Drawing.Point(349, 211);
             this.txtpunto100.Name = "txtpunto100";
             this.txtpunto100.Size = new System.Drawing.Size(180, 27);
             this.txtpunto100.TabIndex = 86;

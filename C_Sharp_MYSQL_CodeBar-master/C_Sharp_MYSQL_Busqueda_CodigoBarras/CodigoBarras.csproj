@@ -253,6 +253,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="CodigoBarras_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -271,6 +272,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="7659005_brand_assets_task_manager_business_icon.ico" />
+    <None Include="Resources\icono.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -116,7 +116,7 @@
             this.btnestadisticas.Name = "btnestadisticas";
             this.btnestadisticas.Size = new System.Drawing.Size(228, 52);
             this.btnestadisticas.TabIndex = 15;
-            this.btnestadisticas.Text = "Estadisticas";
+            this.btnestadisticas.Text = "Estadísticas";
             this.btnestadisticas.UseVisualStyleBackColor = false;
             this.btnestadisticas.Click += new System.EventHandler(this.btnestadisticas_Click);
             // 
@@ -247,12 +247,13 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(32, 51);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 20);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(177, 118);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panel4
             // 
@@ -356,9 +357,9 @@
             this.restbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.restbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.restbtn.Image = ((System.Drawing.Image)(resources.GetObject("restbtn.Image")));
-            this.restbtn.Location = new System.Drawing.Point(1496, 3);
+            this.restbtn.Location = new System.Drawing.Point(1499, 6);
             this.restbtn.Name = "restbtn";
-            this.restbtn.Size = new System.Drawing.Size(30, 30);
+            this.restbtn.Size = new System.Drawing.Size(27, 27);
             this.restbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.restbtn.TabIndex = 3;
             this.restbtn.TabStop = false;
@@ -368,10 +369,11 @@
             // maximizarbtn
             // 
             this.maximizarbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.maximizarbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.maximizarbtn.Image = ((System.Drawing.Image)(resources.GetObject("maximizarbtn.Image")));
-            this.maximizarbtn.Location = new System.Drawing.Point(1496, 3);
+            this.maximizarbtn.Location = new System.Drawing.Point(1499, 6);
             this.maximizarbtn.Name = "maximizarbtn";
-            this.maximizarbtn.Size = new System.Drawing.Size(30, 30);
+            this.maximizarbtn.Size = new System.Drawing.Size(27, 27);
             this.maximizarbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.maximizarbtn.TabIndex = 2;
             this.maximizarbtn.TabStop = false;
@@ -382,9 +384,9 @@
             this.minimizarbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minimizarbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.minimizarbtn.Image = ((System.Drawing.Image)(resources.GetObject("minimizarbtn.Image")));
-            this.minimizarbtn.Location = new System.Drawing.Point(1450, 3);
+            this.minimizarbtn.Location = new System.Drawing.Point(1453, 6);
             this.minimizarbtn.Name = "minimizarbtn";
-            this.minimizarbtn.Size = new System.Drawing.Size(30, 30);
+            this.minimizarbtn.Size = new System.Drawing.Size(27, 27);
             this.minimizarbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.minimizarbtn.TabIndex = 1;
             this.minimizarbtn.TabStop = false;
@@ -395,9 +397,9 @@
             this.cerrarbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cerrarbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cerrarbtn.Image = ((System.Drawing.Image)(resources.GetObject("cerrarbtn.Image")));
-            this.cerrarbtn.Location = new System.Drawing.Point(1546, 3);
+            this.cerrarbtn.Location = new System.Drawing.Point(1549, 6);
             this.cerrarbtn.Name = "cerrarbtn";
-            this.cerrarbtn.Size = new System.Drawing.Size(30, 30);
+            this.cerrarbtn.Size = new System.Drawing.Size(27, 27);
             this.cerrarbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cerrarbtn.TabIndex = 0;
             this.cerrarbtn.TabStop = false;
@@ -424,6 +426,7 @@
             this.Controls.Add(this.BarraTitulo);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Inicio";
             this.Text = "Inicio";
             this.Load += new System.EventHandler(this.Inicio_Load);

@@ -58,11 +58,11 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(515, 28);
+            this.label1.Location = new System.Drawing.Point(546, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(291, 56);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Estadisticas";
+            this.label1.Text = "Estadísticas";
             // 
             // chart1
             // 
@@ -70,13 +70,13 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(48, 115);
+            this.chart1.Location = new System.Drawing.Point(-48, 121);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1294, 587);
+            this.chart1.Size = new System.Drawing.Size(1570, 587);
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
             this.chart1.Visible = false;
@@ -87,13 +87,13 @@
             this.TotalMes.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.TotalMes.Legends.Add(legend2);
-            this.TotalMes.Location = new System.Drawing.Point(48, 115);
+            this.TotalMes.Location = new System.Drawing.Point(-48, 121);
             this.TotalMes.Name = "TotalMes";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.TotalMes.Series.Add(series2);
-            this.TotalMes.Size = new System.Drawing.Size(1294, 587);
+            this.TotalMes.Size = new System.Drawing.Size(1570, 587);
             this.TotalMes.TabIndex = 30;
             this.TotalMes.Text = "chart2";
             this.TotalMes.Visible = false;
@@ -104,13 +104,13 @@
             this.TotalAño.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.TotalAño.Legends.Add(legend3);
-            this.TotalAño.Location = new System.Drawing.Point(48, 115);
+            this.TotalAño.Location = new System.Drawing.Point(-48, 121);
             this.TotalAño.Name = "TotalAño";
             series3.ChartArea = "ChartArea1";
             series3.Legend = "Legend1";
             series3.Name = "Series1";
             this.TotalAño.Series.Add(series3);
-            this.TotalAño.Size = new System.Drawing.Size(1294, 587);
+            this.TotalAño.Size = new System.Drawing.Size(1570, 587);
             this.TotalAño.TabIndex = 31;
             this.TotalAño.Text = "chart3";
             this.TotalAño.Visible = false;
@@ -177,8 +177,9 @@
             this.TotalDias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.TotalDias.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TotalDias.ForeColor = System.Drawing.Color.White;
-            this.TotalDias.Location = new System.Drawing.Point(441, 267);
+            this.TotalDias.Location = new System.Drawing.Point(453, 239);
             this.TotalDias.Name = "TotalDias";
+            this.TotalDias.ReadOnly = true;
             this.TotalDias.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.TotalDias.Size = new System.Drawing.Size(472, 228);
             this.TotalDias.TabIndex = 54;
@@ -190,10 +191,11 @@
             this.Totalventasdeldia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.Totalventasdeldia.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Totalventasdeldia.ForeColor = System.Drawing.Color.White;
-            this.Totalventasdeldia.Location = new System.Drawing.Point(441, 491);
+            this.Totalventasdeldia.Location = new System.Drawing.Point(453, 463);
             this.Totalventasdeldia.Name = "Totalventasdeldia";
+            this.Totalventasdeldia.ReadOnly = true;
             this.Totalventasdeldia.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.Totalventasdeldia.Size = new System.Drawing.Size(472, 41);
+            this.Totalventasdeldia.Size = new System.Drawing.Size(472, 114);
             this.Totalventasdeldia.TabIndex = 55;
             this.Totalventasdeldia.Text = "";
             this.Totalventasdeldia.Visible = false;

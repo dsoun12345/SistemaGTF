@@ -50,7 +50,7 @@ namespace ProyectoCodigo
         {
             if (string.IsNullOrWhiteSpace(txtcodigo.Text))
             {
-                MessageBox.Show("Por favor, ingresa algún dato.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, ingrese algún dato.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace ProyectoCodigo
                 if (ventana_dialogo.ShowDialog() == DialogResult.OK)
                 {
                     imagen_codigo.Save(ventana_dialogo.FileName, ImageFormat.Png);
-                    MessageBox.Show("Código generado guardado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Código guardado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -192,7 +192,13 @@ namespace ProyectoCodigo
             }
         }
 
-
+        private void btnrecargar_Click(object sender, EventArgs e)
+        {
+            txtboxDNI1.Text = string.Empty;
+            txttitulo.Text = string.Empty;
+            txtcodigo.Text = string.Empty;
+            picturecodigo.BackgroundImage = null;
+        }
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -304,6 +310,5 @@ namespace ProyectoCodigo
 
         }
 
-       
-    }
+          }
 }

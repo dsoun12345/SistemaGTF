@@ -38,7 +38,11 @@
             this.btnguardar0 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDescripcion1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtCodDni
@@ -46,7 +50,7 @@
             this.txtCodDni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtCodDni.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodDni.ForeColor = System.Drawing.Color.White;
-            this.txtCodDni.Location = new System.Drawing.Point(206, 47);
+            this.txtCodDni.Location = new System.Drawing.Point(206, 55);
             this.txtCodDni.Name = "txtCodDni";
             this.txtCodDni.Size = new System.Drawing.Size(143, 27);
             this.txtCodDni.TabIndex = 25;
@@ -56,18 +60,18 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(23, 46);
+            this.label1.Location = new System.Drawing.Point(23, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 28);
             this.label1.TabIndex = 24;
-            this.label1.Text = "Codigo o DNI:";
+            this.label1.Text = "Código o DNI:";
             // 
             // txtFecIni
             // 
             this.txtFecIni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.txtFecIni.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFecIni.ForeColor = System.Drawing.Color.White;
-            this.txtFecIni.Location = new System.Drawing.Point(571, 47);
+            this.txtFecIni.Location = new System.Drawing.Point(573, 55);
             this.txtFecIni.Name = "txtFecIni";
             this.txtFecIni.Size = new System.Drawing.Size(180, 27);
             this.txtFecIni.TabIndex = 28;
@@ -77,7 +81,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(404, 46);
+            this.label2.Location = new System.Drawing.Point(404, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(161, 28);
             this.label2.TabIndex = 27;
@@ -98,7 +102,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(404, 124);
+            this.label3.Location = new System.Drawing.Point(404, 122);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 28);
             this.label3.TabIndex = 29;
@@ -114,9 +118,9 @@
             this.btnguardar0.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnguardar0.Image = ((System.Drawing.Image)(resources.GetObject("btnguardar0.Image")));
             this.btnguardar0.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnguardar0.Location = new System.Drawing.Point(83, 111);
+            this.btnguardar0.Location = new System.Drawing.Point(28, 102);
             this.btnguardar0.Name = "btnguardar0";
-            this.btnguardar0.Size = new System.Drawing.Size(192, 52);
+            this.btnguardar0.Size = new System.Drawing.Size(321, 52);
             this.btnguardar0.TabIndex = 81;
             this.btnguardar0.Text = "Buscar";
             this.btnguardar0.UseVisualStyleBackColor = false;
@@ -135,10 +139,10 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(23, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(806, 172);
+            this.groupBox1.Size = new System.Drawing.Size(774, 172);
             this.groupBox1.TabIndex = 82;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Busqueda";
+            this.groupBox1.Text = "Búsqueda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtDescripcion1
@@ -148,9 +152,45 @@
             this.txtDescripcion1.ForeColor = System.Drawing.Color.White;
             this.txtDescripcion1.Location = new System.Drawing.Point(23, 200);
             this.txtDescripcion1.Name = "txtDescripcion1";
-            this.txtDescripcion1.Size = new System.Drawing.Size(1335, 673);
+            this.txtDescripcion1.ReadOnly = true;
+            this.txtDescripcion1.Size = new System.Drawing.Size(1330, 606);
             this.txtDescripcion1.TabIndex = 82;
             this.txtDescripcion1.Text = "";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Location = new System.Drawing.Point(813, 58);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(540, 104);
+            this.groupBox2.TabIndex = 82;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Función";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label8.Location = new System.Drawing.Point(312, 42);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 28);
+            this.label8.TabIndex = 3;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label11.Location = new System.Drawing.Point(25, 55);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(496, 24);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "* Buscar registros entre fechas por código o DNI";
             // 
             // FechasTrabajo
             // 
@@ -158,6 +198,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1370, 885);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtDescripcion1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -166,6 +207,8 @@
             this.Load += new System.EventHandler(this.FechasTrabajo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -181,5 +224,8 @@
         private System.Windows.Forms.Button btnguardar0;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox txtDescripcion1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
     }
 }

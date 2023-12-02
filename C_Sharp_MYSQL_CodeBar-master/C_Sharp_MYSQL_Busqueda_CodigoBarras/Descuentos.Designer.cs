@@ -54,6 +54,7 @@
             this.txtcodigo2.ForeColor = System.Drawing.Color.White;
             this.txtcodigo2.Location = new System.Drawing.Point(39, 100);
             this.txtcodigo2.Name = "txtcodigo2";
+            this.txtcodigo2.ReadOnly = true;
             this.txtcodigo2.Size = new System.Drawing.Size(300, 33);
             this.txtcodigo2.TabIndex = 36;
             // 
@@ -66,7 +67,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 28);
             this.label2.TabIndex = 35;
-            this.label2.Text = "Codigo:";
+            this.label2.Text = "Código:";
             // 
             // label1
             // 
@@ -86,6 +87,7 @@
             this.txtpuntosacumulados01.ForeColor = System.Drawing.Color.White;
             this.txtpuntosacumulados01.Location = new System.Drawing.Point(128, 109);
             this.txtpuntosacumulados01.Name = "txtpuntosacumulados01";
+            this.txtpuntosacumulados01.ReadOnly = true;
             this.txtpuntosacumulados01.Size = new System.Drawing.Size(300, 33);
             this.txtpuntosacumulados01.TabIndex = 38;
             this.txtpuntosacumulados01.TextChanged += new System.EventHandler(this.txtpuntosacumulados01_TextChanged);
@@ -107,9 +109,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(121, 196);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(201, 28);
+            this.label3.Size = new System.Drawing.Size(208, 28);
             this.label3.TabIndex = 39;
-            this.label3.Text = "Puntos a Aplicar";
+            this.label3.Text = "Puntos a Aplicar:";
             // 
             // txtvalordescu
             // 
@@ -118,6 +120,7 @@
             this.txtvalordescu.ForeColor = System.Drawing.Color.White;
             this.txtvalordescu.Location = new System.Drawing.Point(125, 352);
             this.txtvalordescu.Name = "txtvalordescu";
+            this.txtvalordescu.ReadOnly = true;
             this.txtvalordescu.Size = new System.Drawing.Size(300, 33);
             this.txtvalordescu.TabIndex = 48;
             // 
@@ -128,9 +131,9 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label4.Location = new System.Drawing.Point(120, 313);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(242, 28);
+            this.label4.Size = new System.Drawing.Size(249, 28);
             this.label4.TabIndex = 47;
-            this.label4.Text = "Valor de Descuento";
+            this.label4.Text = "Valor de Descuento:";
             // 
             // txtpuntosvalor
             // 
@@ -139,6 +142,7 @@
             this.txtpuntosvalor.ForeColor = System.Drawing.Color.White;
             this.txtpuntosvalor.Location = new System.Drawing.Point(54, 78);
             this.txtpuntosvalor.Name = "txtpuntosvalor";
+            this.txtpuntosvalor.ReadOnly = true;
             this.txtpuntosvalor.Size = new System.Drawing.Size(300, 33);
             this.txtpuntosvalor.TabIndex = 49;
             // 
@@ -167,7 +171,7 @@
             this.groupBox1.Controls.Add(this.txtcodigo2);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(60, 89);
+            this.groupBox1.Location = new System.Drawing.Point(55, 86);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(403, 174);
             this.groupBox1.TabIndex = 52;
@@ -185,7 +189,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(537, 45);
+            this.groupBox2.Location = new System.Drawing.Point(532, 42);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(534, 513);
             this.groupBox2.TabIndex = 53;
@@ -198,7 +202,7 @@
             this.groupBox3.Controls.Add(this.txtpuntosvalor);
             this.groupBox3.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold);
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(60, 352);
+            this.groupBox3.Location = new System.Drawing.Point(55, 349);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(403, 165);
             this.groupBox3.TabIndex = 54;
@@ -214,6 +218,10 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.MaximizeBox = false;
             this.Name = "Descuentos";
             this.Text = "Descuentos";
             this.Load += new System.EventHandler(this.Descuentos_Load);

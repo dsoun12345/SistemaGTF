@@ -47,6 +47,7 @@
             this.txtboxDNI1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnrecargar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picturecodigo)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,7 +79,7 @@
             this.btnguardar.Name = "btnguardar";
             this.btnguardar.Size = new System.Drawing.Size(352, 73);
             this.btnguardar.TabIndex = 16;
-            this.btnguardar.Text = "Guardar Codigo";
+            this.btnguardar.Text = "Guardar Código";
             this.btnguardar.UseVisualStyleBackColor = false;
             this.btnguardar.Click += new System.EventHandler(this.btnguardar_Click_1);
             // 
@@ -97,7 +98,7 @@
             this.btngenerarcodigo.Name = "btngenerarcodigo";
             this.btngenerarcodigo.Size = new System.Drawing.Size(352, 73);
             this.btngenerarcodigo.TabIndex = 15;
-            this.btngenerarcodigo.Text = "Generar Codigo";
+            this.btngenerarcodigo.Text = "Generar Código";
             this.btngenerarcodigo.UseVisualStyleBackColor = false;
             this.btngenerarcodigo.Click += new System.EventHandler(this.btngenerarcodigo_Click);
             // 
@@ -157,7 +158,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 36);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Codigo:";
+            this.label2.Text = "Código:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
@@ -179,9 +180,9 @@
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label18.Location = new System.Drawing.Point(429, 30);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(557, 44);
+            this.label18.Size = new System.Drawing.Size(543, 44);
             this.label18.TabIndex = 19;
-            this.label18.Text = "Generador de Targeta Cliente";
+            this.label18.Text = "Generador de Tarjeta Cliente";
             this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // groupBox2
@@ -195,7 +196,7 @@
             this.groupBox2.Size = new System.Drawing.Size(727, 129);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Funcion";
+            this.groupBox2.Text = "Función";
             // 
             // label8
             // 
@@ -215,9 +216,9 @@
             this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label11.Location = new System.Drawing.Point(23, 67);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(660, 24);
+            this.label11.Size = new System.Drawing.Size(641, 24);
             this.label11.TabIndex = 19;
-            this.label11.Text = "* Se generara un codigo para su implementacion en su targeta";
+            this.label11.Text = "* Se creará un código para su implementación en una tarjeta";
             // 
             // pictureBox1
             // 
@@ -284,12 +285,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Generar";
             // 
+            // btnrecargar
+            // 
+            this.btnrecargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnrecargar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnrecargar.FlatAppearance.BorderSize = 0;
+            this.btnrecargar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnrecargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnrecargar.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnrecargar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnrecargar.Image = ((System.Drawing.Image)(resources.GetObject("btnrecargar.Image")));
+            this.btnrecargar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnrecargar.Location = new System.Drawing.Point(49, 32);
+            this.btnrecargar.Name = "btnrecargar";
+            this.btnrecargar.Size = new System.Drawing.Size(47, 52);
+            this.btnrecargar.TabIndex = 32;
+            this.btnrecargar.UseVisualStyleBackColor = false;
+            this.btnrecargar.Click += new System.EventHandler(this.btnrecargar_Click);
+            // 
             // Impresion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1370, 885);
+            this.Controls.Add(this.btnrecargar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -331,5 +351,6 @@
         private System.Windows.Forms.TextBox txtboxDNI1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnrecargar;
     }
 }

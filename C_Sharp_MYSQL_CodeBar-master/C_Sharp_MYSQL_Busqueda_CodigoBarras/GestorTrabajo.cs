@@ -92,7 +92,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 else
                 {
-                    MessageBox.Show("Por favor, ingresa algún dato en DNI.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Ingresa algún dato en DNI.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -195,7 +195,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 {
                     // Guardar la imagen como formato JPEG
                     imagen_codigo.Save(rutaGuardar, ImageFormat.Jpeg);
-                    MessageBox.Show("Código generado guardado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El código ha sido guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -204,7 +204,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             else
             {
-                MessageBox.Show("No se ha generado un código de barras para guardar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No se ha generado el código de barras.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -236,7 +236,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener el último valor de nom_completos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return ultimoNomCompletos;
@@ -269,7 +269,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener la última fecha de entrega: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return ultimaFechaEntrega;
@@ -297,7 +297,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener el último valor de DNI: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return ultimoDNI;
@@ -325,7 +325,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener el último valor de RUC: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return ultimoRUC;
@@ -354,7 +354,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             else
             {
-                MessageBox.Show("La fecha de entrega no tiene el formato correcto (dd/MM/yyyy)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("La fecha de entrega no tiene el formato correcto (dd/MM/yyyy)", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Salir del método si la fecha no tiene el formato correcto
             }
 
@@ -383,16 +383,16 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                 if (filasAfectadas > 0)
                 {
-                    MessageBox.Show("Datos guardados en la tabla gestion_trabajo", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Registro finalizado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("No se pudieron guardar los datos en la tabla gestion_trabajo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Se produjo un error inesperado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -415,9 +415,9 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             using (StreamWriter sw = File.AppendText(rutaArchivo))
             {
                 // Definir la consulta SQL para obtener los registros
-                string query = "SELECT id, fecha_entrega, descripcion, nom_completos, codigotarjeta, DNI, verificacion FROM gestion_ventas " +
-                    "WHERE fecha_entrega > @fechaActual " +
-                    "ORDER BY fecha_entrega ASC";
+                string query = "SELECT id, fecha_entrega, descripcion, nom_completos, codigotarjeta, DNI, telefono, verificacion FROM gestion_ventas " +
+            "WHERE fecha_entrega > @fechaActual " +
+            "ORDER BY fecha_entrega ASC";
 
                 try
                 {
@@ -437,6 +437,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                                 string nombreCompleto = reader["nom_completos"].ToString();
                                 string codigoTarjeta = reader["codigotarjeta"].ToString();
                                 string dni = reader["DNI"].ToString();
+                                string telefono = reader["telefono"].ToString(); 
                                 string verificacion = reader["verificacion"].ToString();
 
                                 string[] descripciones = descripcionSinFormato.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -465,8 +466,9 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                                         descripcionFormateada.Append($"Tipo de Corte: {datos[3].Trim()}, ");
                                         descripcionFormateada.Append($"Material: {datos[4].Trim()}, ");
                                         descripcionFormateada.Append($"Precio: {datos[5].Trim()},");
-                                        descripcionFormateada.Append($"Nombre Completo: {nombreCompleto},");
-                                        descripcionFormateada.Append($"Verificación: {verificacion}\r\n\r\n");
+                                        descripcionFormateada.Append($"Cliente: {nombreCompleto},");
+                                        descripcionFormateada.Append($"Teléfono: {telefono}, ");
+                                        descripcionFormateada.Append($"Verificación:; {verificacion}\r\n\r\n");
                                     }
                                 }
 
@@ -478,7 +480,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show("Error al obtener trabajos pendientes desde la base de datos: " + ex.Message);
+                    MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

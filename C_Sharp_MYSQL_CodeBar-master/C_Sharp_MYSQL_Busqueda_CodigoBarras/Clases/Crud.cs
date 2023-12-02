@@ -28,8 +28,9 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
 
             }
             catch (Exception ex) {
-                MessageBox.Show("No se mostraron los datos de la DB" + ex.ToString());
-            
+                MessageBox.Show("Error al cargar los datos de la base de datos. Detalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             }
         }
 
@@ -43,13 +44,13 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
 
                 if (dniText.Length != 8)
                 {
-                    MessageBox.Show("El DNI debe tener exactamente 8 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El DNI debe tener exactamente 8 dígitos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (rucText.Length != 11)
                 {
-                    MessageBox.Show("El RUC debe tener exactamente 11 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El RUC debe tener exactamente 11 dígitos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -74,12 +75,12 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
 
                 puntosCommand.ExecuteNonQuery();
 
-                MessageBox.Show("Se guardaron los registros correctamente.");
+                MessageBox.Show("Usuario registrado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 objConexion.cerrarConexion();
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al guardar los registros en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al registrar usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -103,7 +104,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se logró seleccionar los datos de la DB: " + ex.ToString());
+                MessageBox.Show("Error al seleccionar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -114,11 +116,28 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
             try
             {
                 Conexion objConexion = new Conexion();
+
+                // Verificar la longitud del nuevo DNI
+                string nuevoDniText = dni.Text.Trim();
+                if (nuevoDniText.Length != 8)
+                {
+                    MessageBox.Show("El DNI debe tener exactamente 8 dígitos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Verificar la longitud del nuevo RUC
+                string nuevoRucText = ruc.Text.Trim();
+                if (nuevoRucText.Length != 11)
+                {
+                    MessageBox.Show("El RUC debe tener exactamente 11 dígitos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string query = "UPDATE cliente SET dni = @dni, ruc = @ruc, nombres = @nombres, apellidos = @apellidos, razon_social = @razonSocial, direccion = @direccion, telefono = @telefono WHERE id = @id";
                 MySqlCommand MyCommand = new MySqlCommand(query, objConexion.establecerConexion());
                 MyCommand.Parameters.AddWithValue("@id", id.Text);
-                MyCommand.Parameters.AddWithValue("@dni", dni.Text);
-                MyCommand.Parameters.AddWithValue("@ruc", ruc.Text);
+                MyCommand.Parameters.AddWithValue("@dni", nuevoDniText);
+                MyCommand.Parameters.AddWithValue("@ruc", nuevoRucText);
                 MyCommand.Parameters.AddWithValue("@nombres", nombres.Text);
                 MyCommand.Parameters.AddWithValue("@apellidos", apellidos.Text);
                 MyCommand.Parameters.AddWithValue("@razonSocial", razonSocial.Text);
@@ -132,17 +151,17 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
                 string puntosQuery = "UPDATE puntos_A SET dni = @dni, ruc = @ruc WHERE id = @id";
                 MySqlCommand puntosCommand = new MySqlCommand(puntosQuery, objConexion.establecerConexion());
                 puntosCommand.Parameters.AddWithValue("@id", id.Text);
-                puntosCommand.Parameters.AddWithValue("@dni", dni.Text);
-                puntosCommand.Parameters.AddWithValue("@ruc", ruc.Text);
+                puntosCommand.Parameters.AddWithValue("@dni", nuevoDniText);
+                puntosCommand.Parameters.AddWithValue("@ruc", nuevoRucText);
 
                 puntosCommand.ExecuteNonQuery();
 
-                MessageBox.Show("Se modificaron los registros correctamente.");
+                MessageBox.Show("Se modificó correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 objConexion.cerrarConexion();
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al modificar los registros en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al modificar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -169,13 +188,13 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
                 deletePuntosCommand.Parameters.AddWithValue("@id", id.Text);
                 deletePuntosCommand.ExecuteNonQuery();
 
-                MessageBox.Show("Se eliminó el registro seleccionado en ambas tablas.");
+                MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 objConexion.cerrarConexion();
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Error al eliminar el registro en la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al eliminar usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

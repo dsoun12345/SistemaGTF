@@ -21,11 +21,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             InitializeComponent();
         }
 
-        private void Inicio_Load(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void AbrirFormHijo(object formhijo)
         {
             if (this.panel2.Controls.Count > 0)
@@ -89,23 +85,14 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
             AbrirFormHijo(new Estadisticas());
         }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+   
 
         private void cerrarbtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        
-
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         int LX,LY;
         private void maximizarbtn_Click(object sender, EventArgs e)
@@ -145,7 +132,21 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+        private void horafecha_Tick(object sender, EventArgs e)
+        {
+            lblhora.Text = DateTime.Now.ToLongTimeString();
+            lblfecha.Text = DateTime.Now.ToLongDateString();
+        }
 
+        private void apagadobtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+      
+        }
 
         private void BarraTitulo_Paint(object sender, PaintEventArgs e)
         {
@@ -157,11 +158,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         }
 
-        private void apagadobtn_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
+      
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -177,12 +174,21 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         }
 
-        
-
-        private void horafecha_Tick(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            lblhora.Text = DateTime.Now.ToLongTimeString();
-            lblfecha.Text = DateTime.Now.ToLongDateString();
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+     
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

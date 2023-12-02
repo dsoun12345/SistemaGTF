@@ -22,7 +22,7 @@ namespace proyectoconnect
         private List<string> registros = new List<string>();
 
         private const string DropboxAppKey = "5dl2ukw5340uow1";
-        private string DropboxAccessToken = "sl.Bq36jJeYZOYvvs5yMYFaj1o0QhuCfZ5ijlCz5_IAxCZH-FQnphT7YonnmPupGINXMhherxIODP9sHzn7F509GqbRvU2IRHsLKc1uN2PFb8NYleGy3rDC5QSSqZe1ZFQG9buy8o5H0tNnUN__qeX7VR0";
+        private string DropboxAccessToken = "sl.Bq9SMtGarPdJlaTs3qnOzPtD7uW6ICUJ2gfcnLmdk_cX28saE-iDzMB6QQMl1RkZeTorl7YaNra_BU7wTm98QJmlf7iGT7-QFCzGcBAXthXum1fWssGru9MOiwvM8e0wq7CdDarin_VhtObMrOAQeSg";
         public MainPage()
         {
             InitializeComponent();

@@ -14,10 +14,12 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 {
     public partial class Descuentos : Form
     {
+        private decimal descuentoTotal = 0;
 
         public Descuentos()
         {
             InitializeComponent();
+
         }
 
         public string Codigo2
@@ -62,12 +64,12 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar los puntos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Ingrese un valor válido en el campo Código.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ingrese un código válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -96,7 +98,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar el último valor de IGV y puntos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -128,68 +130,103 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 int.TryParse(txtpuntosacumulados01.Text, out puntosAcumulados) &&
                 int.TryParse(txtpuntosapli.Text, out puntosAplicados))
             {
-                if (puntosAplicados <= puntosAcumulados) // Verifica si los puntos aplicados no son mayores que los puntos acumulados
+                if (puntosAplicados <= puntosAcumulados)
                 {
-                    // Realiza la resta de puntos acumulados y puntos aplicados
-                    int nuevosPuntosAcumulados = puntosAcumulados - puntosAplicados;
-
                     // Actualiza la tabla puntos_A con los nuevos puntos acumulados
                     try
                     {
                         Conexion objConexion = new Conexion();
                         MySqlConnection conn = objConexion.establecerConexion();
 
-                        string sql = "UPDATE puntos_A SET puntos = @nuevosPuntos WHERE id = @id";
-                        MySqlCommand cmd = new MySqlCommand(sql, conn);
-                        cmd.Parameters.AddWithValue("@nuevosPuntos", nuevosPuntosAcumulados);
-                        cmd.Parameters.AddWithValue("@id", idPuntosA);
+                        // Resta los puntos aplicados de los puntos acumulados
+                        int nuevosPuntosAcumulados = puntosAcumulados - puntosAplicados;
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
+                        // Obtiene el valor de txtpuntosvalor y verifica si es válido
+                        decimal valorPuntos;
+                        if (decimal.TryParse(txtpuntosvalor.Text, out valorPuntos))
                         {
-                            // Actualización exitosa
-                            MessageBox.Show("Puntos actualizados en la tabla puntos_A.");
+                            // Calcula el valor del descuento y actualiza el descuento total
+                            decimal descuento = (puntosAplicados * valorPuntos) / 100;
+                            descuentoTotal += descuento;
 
-                            // Obtén el valor de txtpuntosvalor y verifica si es válido
-                            decimal valorPuntos;
-                            if (decimal.TryParse(txtpuntosvalor.Text, out valorPuntos))
+                            // Actualiza el TextBox con el valor total del descuento
+                            txtvalordescu.Text = descuentoTotal.ToString();
+
+                            // Actualiza la tabla puntos_A con los nuevos puntos acumulados
+                            string sqlUpdatePuntos = "UPDATE puntos_A SET puntos = @nuevosPuntos WHERE id = @id";
+                            MySqlCommand cmdUpdatePuntos = new MySqlCommand(sqlUpdatePuntos, conn);
+                            cmdUpdatePuntos.Parameters.AddWithValue("@nuevosPuntos", nuevosPuntosAcumulados);
+                            cmdUpdatePuntos.Parameters.AddWithValue("@id", idPuntosA);
+
+                            int rowsAffected = cmdUpdatePuntos.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
                             {
-                                // Calcula el valor del descuento
-                                decimal descuento = (puntosAplicados * valorPuntos) / 100;
-                                txtvalordescu.Text = descuento.ToString();
+                                // Actualización exitosa
+                                MessageBox.Show("Descuento aplicado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
-                                MessageBox.Show("Verifica que el valor de puntos sea válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Se produjo un error inesperado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("No se pudo actualizar los puntos en la tabla puntos_A.");
+                            MessageBox.Show("Verifica que el valor de puntos sea válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
 
                         objConexion.cerrarConexion();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error al actualizar los puntos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Los puntos aplicados no pueden ser mayores que los puntos acumulados.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Los puntos aplicados no pueden ser mayores que los puntos acumulados.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show("Verifica que los valores ingresados sean válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Verifica que los valores ingresados sean válidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-         
+            MostrarPuntos();
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
         }
+
+        private void Descuentos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Conexion objConexion = new Conexion();
+                MySqlConnection conn = objConexion.establecerConexion();
+                string sql = "UPDATE configuracion SET valor_puntos = @valorPuntos WHERE id = (SELECT MAX(id) FROM configuracion)";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@valorPuntos", decimal.Parse(txtpuntosvalor.Text));
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                }
+                else
+                {
+                    MessageBox.Show("Se produjo un error inesperado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                objConexion.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
     }
 }

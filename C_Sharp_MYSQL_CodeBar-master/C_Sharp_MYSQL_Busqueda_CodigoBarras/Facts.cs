@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 {
@@ -24,6 +25,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
 
             InitializeComponent();
+            cboFtPr.SelectedIndexChanged += cboFtPr_SelectedIndexChanged;
+
             Conexion objConexion = new Conexion();
 
             
@@ -31,13 +34,14 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             cbotipop.Items.Add("-------------------");
             cbotipop.Items.Add("Con Tarjeta Cliente");
             cbotipop.Items.Add("Sin Tarjeta Cliente");
-  
+
 
             // Agregar las opciones al ComboBox tipos
             cboFtPr.Items.Add("Proforma");
             cboFtPr.Items.Add("Venta");
 
             // Agregar las opciones al ComboBox tipos
+            cbotipago1.Items.Add("-------------");
             cbotipago1.Items.Add("Efectivo");
             cbotipago1.Items.Add("Tarjeta");
             cbotipago1.Items.Add("Cheque");
@@ -214,7 +218,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
-       
         private void cbotipop_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccion = cbotipop.SelectedItem.ToString(); // Obtener la opción seleccionada
@@ -276,7 +279,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 cbotipago1.Visible = true;
                 label4.Visible = true;
                 txtBoxTelef.Visible = true;
-                cboFtPr.Visible = true; // Mostrar cboFtPr en este caso
+                cboFtPr.Visible = true;
                 label27.Visible = true;
                 txtpuntos.Visible = true;
                 label24.Visible = true;
@@ -286,6 +289,18 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 // Ocultar label21 y label22
                 label21.Visible = false;
                 label22.Visible = false;
+
+                if (seleccion == "Con Tarjeta Cliente" && cboFtPr.Text == "Proforma")
+                {
+                    // Ocultar los controles
+                    label15.Visible = false;
+                    txtBoxdescu.Visible = false;
+                    label27.Visible = false;
+                    txtpuntos.Visible = false;
+                    label24.Visible = false;
+                    txtpuntosacu.Visible = false;
+                }
+                txtBoxcodi.Focus();
             }
             else if (seleccion == "Sin Tarjeta Cliente")
             {
@@ -296,8 +311,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 txtBoxDirec.Visible = true;
                 label5.Visible = true;
                 txtBoxDNI.Visible = true;
-                label15.Visible = true;
-                txtBoxdescu.Visible = true;
+                label15.Visible = false;
+                txtBoxdescu.Visible = false;
                 label7.Visible = true;
                 txtBoxRUC.Visible = true;
                 label14.Visible = true;
@@ -306,19 +321,43 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 cbotipago1.Visible = true;
                 label4.Visible = true;
                 txtBoxTelef.Visible = true;
-                cboFtPr.Visible = true; // Mostrar cboFtPr en este caso
-                label27.Visible = true;
-                txtpuntos.Visible = true;
-                label24.Visible = true;
-                txtpuntosacu.Visible = true;
+                cboFtPr.Visible = true;
+                label27.Visible = false;
+                txtpuntos.Visible = false;
+                label24.Visible = false;
+                txtpuntosacu.Visible = false;
 
 
                 // Ocultar label2, label22 y label21 (según corresponda)
                 label2.Visible = false;
                 txtBoxcodi.Visible = false;
                 label22.Visible = false;
+
+                // Verificar si cbotipop es "Sin Tarjeta Cliente" y cboFtPr es "Venta"
+                if (seleccion == "Sin Tarjeta Cliente" && cboFtPr.Text == "Venta")
+                {
+                    // Ocultar los controles
+                    label15.Visible = false;
+                    txtBoxdescu.Visible = false;
+                    label27.Visible = false;
+                    txtpuntos.Visible = false;
+                    label24.Visible = false;
+                    txtpuntosacu.Visible = false;
+                }
+                else
+                {
+                    // Mostrar los controles si no se cumple la condición
+                    label15.Visible = false;
+                    txtBoxdescu.Visible = false;
+                    label27.Visible = false;
+                    txtpuntos.Visible = false;
+                    label24.Visible = false;
+                    txtpuntosacu.Visible = false;
+                }
+
+               
             }
-            
+
             else if (seleccion == "-------------------")
             {
                 // No es necesario hacer nada adicional aquí, ya que todos los controles están ocultos
@@ -679,8 +718,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         }
 
 
+
         private void txtBoxprecio0_TextChanged(object sender, EventArgs e)
         {
+
             if (!string.IsNullOrEmpty(txtBoxprecio0.Text))
             {
                 // Mostrar los controles relacionados con el producto 1
@@ -1040,18 +1081,18 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         }
 
-        
+
+
 
         private void txtBoxcodi_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
 
             if (e.KeyChar == (char)Keys.Enter)
             {
                 Clases.Busqueda objetoBusqueda = new Clases.Busqueda();
                 objetoBusqueda.buscarCodigo(txtBoxcodi, txtBoxDNI, txtBoxRUC, txtBoxNoCom, txtBoxDirec, txtBoxTelef);
 
-              
+
             }
 
             if (!string.IsNullOrEmpty(txtBoxcodi.Text))
@@ -1095,12 +1136,97 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
        
 
         }
+        
+
+        private void cboFtPr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cboFtPr.SelectedItem.ToString() == "Proforma")
+            {
+                // Ocultar controles relacionados con Proforma
+                txtBoxdescu.Visible = false;
+                txtpuntos.Visible = false;
+                txtpuntosacu.Visible = false;
+                txtBoxRecibido.Visible = false;
+                txtBoxCambio.Visible = false;
+                label15.Visible = false;
+                label27.Visible = false;
+                label24.Visible = false;
+                label26.Visible = false;
+                label25.Visible = false;
+                txtBoxRecibido.Text = "0";
+            }
+
+            else if (cboFtPr.SelectedItem.ToString() == "Venta")
+            {
+                // Mostrar controles relacionados con Venta
+                txtBoxdescu.Visible = true;
+                txtpuntos.Visible = true;
+                txtpuntosacu.Visible = true;
+                txtBoxRecibido.Visible = true;
+                txtBoxCambio.Visible = true;
+                label15.Visible = true;
+                label27.Visible = true;
+                label24.Visible = true;
+                label26.Visible = true;
+                label25.Visible = true;
+
+                // Verificar si cbotipop es "Sin Tarjeta Cliente" y cboFtPr es "Venta"
+                if (cbotipop.SelectedItem.ToString() == "Sin Tarjeta Cliente" && cboFtPr.Text == "Venta")
+                {
+                    // Ocultar los controles
+                    label15.Visible = false;
+                    txtBoxdescu.Visible = false;
+                    label27.Visible = false;
+                    txtpuntos.Visible = false;
+                    label24.Visible = false;
+                    txtpuntosacu.Visible = false;
+                }
+                else
+                {
+                    // Mostrar los controles si no se cumple la condición
+                    label15.Visible = true;
+                    txtBoxdescu.Visible = true;
+                    label27.Visible = true;
+                    txtpuntos.Visible = true;
+                    label24.Visible = true;
+                    txtpuntosacu.Visible = true;
+                }
+            }
+
+
+            if (cboFtPr.SelectedItem.ToString() == "Proforma")
+            {
+                // Si es una proforma, establecer la fecha actual en txtBoxfeent
+                txtBoxfeent.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+                // Establecer el tipo de pago por defecto en "Efectivo"
+                cbotipago1.SelectedItem = "Efectivo";
+
+
+                txtBoxfeent.Enabled = false;
+                cbotipago1.Enabled = false;
+
+            }
+            if (cboFtPr.SelectedItem.ToString() == "Venta")
+            {
+
+                txtBoxfeent.Enabled = true;
+                cbotipago1.Enabled = true;
+
+            }
+
+        }
+
 
 
         private void btnguardar0_Click(object sender, EventArgs e)
         {
+            try
+            {
+                
 
-            DateTime fechaFacturacion = DateTime.ParseExact(txtBoxfefac.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime fechaFacturacion = DateTime.ParseExact(txtBoxfefac.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DateTime fechaPago = DateTime.ParseExact(txtBoxfepago.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture); // Obtener la fecha de pago de txtBoxfepago
             string tipoPago = cbotipago1.SelectedItem.ToString(); // Obtener el tipo de pago de cbotipago1
             string ruc = txtBoxRUC.Text;
@@ -1443,44 +1569,76 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 // Verificar la selección del ComboBox y guardar en la tabla correspondiente
                 if (tabla == "proforma")
                 {
+                    
                     // Insertar la fila resultante en la tabla "proforma" en la base de datos
                     InsertarFilaEnProforma(filaConcatenada, valor, tabla, fechaFacturacion, ruc);
                 }
                 else if (tabla == "gestion_ventas")
                 {
-                    // Insertar la fila resultante en la tabla "factura" en la base de datos
-                    InsertarFilaEnFactura(filaConcatenada, valor, tabla, fechaFacturacion, fechaPago, tipoPago, ruc, fechaEntrega, cambio);
+                        // Verificar que se ingresen el nombre y la dirección
+                        if (string.IsNullOrEmpty(txtBoxNoCom.Text) || string.IsNullOrEmpty(txtBoxDirec.Text))
+                        {
+                            MessageBox.Show("Asegúrate de completar todos los datos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        if (string.IsNullOrEmpty(txtBoxTelef.Text))
+                        {
+                            MessageBox.Show("El formato del número de teléfono no es válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return; // Sale del método si el número de teléfono no es válido
+                        }
+                        // Validar el formato del DNI
+                        if (!Regex.IsMatch(txtBoxDNI.Text, @"^\d{8}$"))
+                        {
+                            MessageBox.Show("El formato del DNI no es válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Validar el formato del RUC
+                        if (!Regex.IsMatch(ruc, @"^\d{11}$"))
+                        {
+                            MessageBox.Show("El formato del RUC no es válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        // Insertar la fila resultante en la tabla "factura" en la base de datos
+                        InsertarFilaEnFactura(filaConcatenada, valor, tabla, fechaFacturacion, fechaPago, tipoPago, ruc, fechaEntrega, cambio);
                     if (!string.IsNullOrEmpty(txtBoxcodi.Text))
                     {
                         string codigoCliente = txtBoxcodi.Text;
                         int puntos = int.Parse(txtpuntos.Text);
                         ActualizarPuntosEnTabla(codigoCliente, puntos);
                     }
-                }
+                        // Obtener el valor de txtBoxcodi
+                        string valorParaTransferir = txtBoxcodi.Text;
+
+                        // Crear una instancia del formulario GestorTrabajo
+                        GestorTrabajo formularioEmergente = new GestorTrabajo();
+
+                        // Configurar el valor de Codigo1 en el formulario GestorTrabajo
+                        formularioEmergente.Codigo1 = valorParaTransferir;
+
+                        // Mostrar el formulario GestorTrabajo
+                        formularioEmergente.ShowDialog();
+                    }
             }
             else
             {
                 // Mostrar un mensaje de error si los campos del primer grupo no están llenos
-                MessageBox.Show("Asegúrate de completar al menos los campos del primer grupo antes de guardar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Asegúrate de completar todos los datos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            } 
+
             }
-
-
-
-            // Obtener el valor de txtBoxcodi
-            string valorParaTransferir = txtBoxcodi.Text;
-
-            // Crear una instancia del formulario GestorTrabajo
-            GestorTrabajo formularioEmergente = new GestorTrabajo();
-
-            // Configurar el valor de Codigo1 en el formulario GestorTrabajo
-            formularioEmergente.Codigo1 = valorParaTransferir;
-                    
-            // Mostrar el formulario GestorTrabajo
-            formularioEmergente.ShowDialog();
-
+            catch (FormatException)
+            {
+                // Captura la excepción de formato y muestra un MessageBox de advertencia
+                MessageBox.Show("Verifica los datos ingresados.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                // Maneja otras excepciones de manera similar si es necesario
+                MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            }
             limpiartodo();
-
-
         }
 
 
@@ -1496,8 +1654,45 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@nom_completos", txtBoxNoCom.Text);
-                cmd.Parameters.AddWithValue("@DNI", Convert.ToInt32(txtBoxDNI.Text));
-                cmd.Parameters.AddWithValue("@RUC", ruc); // Nueva columna "RUC"
+
+                // Modificar la conversión del DNI (si se proporciona)
+                if (!string.IsNullOrWhiteSpace(txtBoxDNI.Text))
+                {
+                    if (int.TryParse(txtBoxDNI.Text, out int dni))
+                    {
+                        cmd.Parameters.AddWithValue("@DNI", dni);
+                    }
+                    else
+                    {
+                        // Manejar la situación cuando el DNI no es un número válido
+                        throw new FormatException("El formato del DNI no es válido.");
+                    }
+                }
+                else
+                {
+                    // Si no se proporciona el DNI, asignar un valor nulo a la base de datos
+                    cmd.Parameters.AddWithValue("@DNI", DBNull.Value);
+                }
+
+                // Modificar la conversión del RUC (si se proporciona)
+                if (!string.IsNullOrWhiteSpace(txtBoxRUC.Text))
+                {
+                    if (long.TryParse(txtBoxRUC.Text, out long rucNumero))
+                    {
+                        cmd.Parameters.AddWithValue("@RUC", rucNumero);
+                    }
+                    else
+                    {
+                        // Manejar la situación cuando el RUC no es un número válido
+                        throw new FormatException("El formato del RUC no es válido.");
+                    }
+                }
+                else
+                {
+                    // Si no se proporciona el RUC, asignar un valor nulo a la base de datos
+                    cmd.Parameters.AddWithValue("@RUC", DBNull.Value);
+                }
+
                 cmd.Parameters.AddWithValue("@descripcion", filaConcatenada);
                 cmd.Parameters.AddWithValue("@valor", valor);
                 cmd.Parameters.AddWithValue("@fecha_facturacion", fechaFacturacion);
@@ -1505,11 +1700,16 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                MessageBox.Show($"Se guardó la fila en la tabla {tabla} correctamente.");
+                MessageBox.Show("Registró exitoso.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (FormatException ex)
+            {
+                // Manejar la excepción específica del DNI o RUC
+                MessageBox.Show(ex.Message, "Se produjo un error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"No se logró guardar la fila en la tabla {tabla}, error: {ex.ToString()}");
+                MessageBox.Show("Se produjo un error inesperado: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1517,6 +1717,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             try
             {
+
                 Conexion objetoConexion = new Conexion();
                 MySqlConnection conn = objetoConexion.establecerConexion();
 
@@ -1536,13 +1737,14 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 string codigoTarjeta = txtBoxcodi.Text;
 
                 // Definir la consulta SQL para insertar en la tabla "gestion_ventas" con fecha de pago, tipo de pago, tipo de cliente, IGV y total
-                string sql = $"INSERT INTO {tabla} (nom_completos, DNI, RUC, descripcion, valor, fecha_facturacion, fecha_pago, tipo_pago, igv, total, fecha_entrega, cambio, codigotarjeta) " +
-                    "VALUES (@nom_completos, @DNI, @RUC, @descripcion, @valor, @fecha_facturacion, @fecha_pago, @tipo_pago, @igv, @total, @fecha_entrega, @cambio, @codigotarjeta)";
+                string sql = $"INSERT INTO {tabla} (nom_completos, DNI, RUC, telefono, descripcion, valor, fecha_facturacion, fecha_pago, tipo_pago, igv, total, fecha_entrega, cambio, codigotarjeta) " +
+                    "VALUES (@nom_completos, @DNI, @RUC, @telefono, @descripcion, @valor, @fecha_facturacion, @fecha_pago, @tipo_pago, @igv, @total, @fecha_entrega, @cambio, @codigotarjeta)";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@nom_completos", txtBoxNoCom.Text);
                 cmd.Parameters.AddWithValue("@DNI", Convert.ToInt32(txtBoxDNI.Text));
                 cmd.Parameters.AddWithValue("@RUC", ruc);
+                cmd.Parameters.AddWithValue("@telefono", Convert.ToInt32(txtBoxTelef.Text));  // Agregar el valor del teléfono
                 cmd.Parameters.AddWithValue("@descripcion", filaConcatenada);
                 cmd.Parameters.AddWithValue("@valor", valor);
                 cmd.Parameters.AddWithValue("@fecha_facturacion", fechaFacturacion);
@@ -1557,26 +1759,46 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
-                MessageBox.Show($"Se guardó la fila en la tabla {tabla} correctamente.");
+                MessageBox.Show("Registro exitoso. Continúa con el procedimiento en la siguiente pestaña.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+
             catch (Exception ex)
             {
-                MessageBox.Show($"No se logró guardar la fila en la tabla {tabla}, error: {ex.ToString()}");
+                MessageBox.Show(ex.Message, "Se produjo un error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-
+        
         private void limpiartodo()
         {
             //Limpiar
+            cbotipago1.SelectedIndex = 0;
+            cbotipop.SelectedIndex = 0; 
             cbocorte.SelectedIndex = -1;
             cbomaterial.SelectedIndex = -1;
+            txtBoxcodi.Text = "";
+            txtBoxNoCom.Text = "";
+            txtBoxDirec.Text = "";
+            txtBoxDNI.Text = "";
+            txtBoxdescu.Text = "";
+            txtBoxRUC.Text = "";
+            txtBoxfeent.Text = "";
             txtBoxcant0.Text = "";
             txtBoxdes0.Text = "";
             txtBoxtamc0.Text = "";
             txtBoxprecio0.Text = "";
             txtBoxmate0.Text = "";
             txtBoxcorpe0.Text = "";
+            txtBoxTelef.Text = "";
+            txtpuntosacu.Text = "";
+            txtBoxtotalc0.Text = "S/ 0.00";
+            txtBoxIGV1.Text = "S/ 0.00";
+            txtBoxRecibido.Text = "";
+            txtBoxtotalcompleto1.Text = "S/ 0.00";
+            txtBoxCambio.Text = "";
+            txtBoxfepago.Text = "";
+
 
             txtBoxprecio1.Text = "";
             txtBoxprecio2.Text = "";
@@ -1589,7 +1811,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             txtBoxprecio9.Text = "";
         }
 
-        
 
 
         private void MostrarFechaActual()
@@ -1625,16 +1846,19 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     // Fecha de hoy + 5 días para Cheque o Transferencia
                     fechaPago = fechaActual.AddDays(5);
                 }
+                else if (formaPago == "-------------")
+                {
+                    // Si la forma de pago es "-------------", dejar la fecha de pago en blanco
+                    fechaPago = DateTime.MinValue;
+                }
                 else
                 {
                     // Por defecto, usar la fecha de hoy
                     fechaPago = fechaActual;
                 }
 
-          
-
                 // Mostrar la fecha de pago en el formato deseado en el TextBox
-                txtBoxfepago.Text = fechaPago.ToString("dd/MM/yyyy"); // Cambia el formato según tus preferencias
+                txtBoxfepago.Text = (fechaPago != DateTime.MinValue) ? fechaPago.ToString("dd/MM/yyyy") : "";
             }
         }
 
@@ -1660,25 +1884,36 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                 if (reader.Read())
                 {
-                    igv = reader.GetDecimal("igv");
+                    // Verificar si el valor de "igv" es numérico antes de intentar convertirlo
+                    if (reader["igv"] != DBNull.Value)
+                    {
+                        string igvString = reader["igv"].ToString();
+
+                        // Verificar si el valor es numérico
+                        if (decimal.TryParse(igvString,
+                            NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands,
+                            CultureInfo.InvariantCulture,
+                            out igv))
+                        {
+                            // Obtener el valor total en moneda peruana y quitar el símbolo "S/"
+                            string valorTotalConSimbolo = txtBoxtotalc0.Text.Trim();
+                            decimal valorTotal = decimal.Parse(valorTotalConSimbolo.Replace("S/", "").Trim(), CultureInfo.GetCultureInfo("es-PE"));
+
+                            // Calcular el IGV
+                            decimal porcentajeIGV = igv / 100; // Convertir el porcentaje a decimal
+                            decimal totalIGV = valorTotal * porcentajeIGV;
+
+                            // Mostrar el resultado en txtBoxIGV1 con formato de moneda peruana
+                            CultureInfo culture = new CultureInfo("es-PE");
+                            txtBoxIGV1.Text = totalIGV.ToString("C", culture);
+                        }
+                    }
                 }
 
                 conn.Close();
-
-                // Obtener el valor total en moneda peruana y quitar el símbolo "S/"
-                string valorTotalConSimbolo = txtBoxtotalc0.Text.Trim();
-                decimal valorTotal = decimal.Parse(valorTotalConSimbolo.Replace("S/", "").Trim(), CultureInfo.GetCultureInfo("es-PE"));
-
-                // Calcular el IGV
-                decimal totalIGV = valorTotal * igv;
-
-                // Mostrar el resultado en txtBoxIGV1 con formato de moneda peruana
-                CultureInfo culture = new CultureInfo("es-PE");
-                txtBoxIGV1.Text = totalIGV.ToString("C", culture);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("No se pudo obtener el valor del IGV: " + ex.ToString());
             }
         }
 
@@ -1717,6 +1952,13 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private void txtBoxRecibido_TextChanged(object sender, EventArgs e)
         {
+            // Verificar si el texto en txtBoxRecibido es "0"
+            if (txtBoxRecibido.Text.Trim() == "0")
+            {
+                // Asignar "0" directamente al txtBoxCambio y salir del evento
+                txtBoxCambio.Text = "0";
+                return;
+            }
             // Verificar si el texto en txtBoxRecibido es un número válido
             if (decimal.TryParse(txtBoxRecibido.Text, out decimal recibido))
             {
@@ -1824,7 +2066,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar o actualizar los puntos: " + ex.ToString());
+                MessageBox.Show(ex.Message, "Se produjo un error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1834,39 +2076,46 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             try
             {
-                Conexion objetoConexion = new Conexion();
-                MySqlConnection conn = objetoConexion.establecerConexion();
-
-                // Realizar una consulta para obtener los puntos del cliente.
-                string sql = "SELECT puntos FROM puntos_A WHERE id = @codigo";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@codigo", Convert.ToInt32(codigoCliente));
-
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                if (int.TryParse(codigoCliente, out int codigoClienteInt))
                 {
-                    if (reader.Read())
+                    Conexion objetoConexion = new Conexion();
+                    MySqlConnection conn = objetoConexion.establecerConexion();
+
+                    // Realizar una consulta para obtener los puntos del cliente.
+                    string sql = "SELECT puntos FROM puntos_A WHERE id = @codigo";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@codigo", codigoClienteInt);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (!reader.IsDBNull(reader.GetOrdinal("puntos")))
+                        if (reader.Read())
                         {
-                            int puntos = reader.GetInt32("puntos");
-                            txtpuntosacu.Text = puntos.ToString(); // Mostrar los puntos en el TextBox txtpuntosacu
+                            if (!reader.IsDBNull(reader.GetOrdinal("puntos")))
+                            {
+                                int puntos = reader.GetInt32("puntos");
+                                txtpuntosacu.Text = puntos.ToString(); // Mostrar los puntos en el TextBox txtpuntosacu
+                            }
+                            else
+                            {
+                                txtpuntosacu.Text = "0"; // No se encontraron puntos, muestra 0 en el TextBox txtpuntosacu
+                            }
                         }
                         else
                         {
-                            txtpuntosacu.Text = "0"; // No se encontraron puntos, muestra 0 en el TextBox txtpuntosacu
+                            txtpuntosacu.Text = "0"; // No se encontró al cliente, muestra 0 en el TextBox txtpuntosacu
                         }
                     }
-                    else
-                    {
-                        txtpuntosacu.Text = "0"; // No se encontró al cliente, muestra 0 en el TextBox txtpuntosacu
-                    }
-                }
 
-                conn.Close();
+                    conn.Close();
+                }
+                else
+                {
+                    // Mostrar un mensaje de advertencia al usuario
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener los puntos: " + ex.ToString());
+                MessageBox.Show(ex.Message, "Se produjo un error inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1879,14 +2128,15 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             ObtenerYMostrarIGV();
             MostrarTotalCompleto();
             CalcularPuntos();
-           
+        
         }
 
 
         private void txtBoxIGV1_TextChanged(object sender, EventArgs e)
         {
-            MostrarTotalCompleto();
-
+           
+            ObtenerYMostrarIGV();
+         
         }
 
         private void Facts_Load(object sender, EventArgs e)
@@ -1899,52 +2149,82 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private void btndescuentos0_Click(object sender, EventArgs e)
         {
+            // Verificar si el combo está en "Proforma"
+            if (cboFtPr.Text == "Proforma")
+            {
+                MessageBox.Show("No se pueden aplicar descuentos en una proforma.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salir del método sin realizar más acciones
+            }
             // Obtener el valor de txtBoxcodi
             string valorParaTransferir = txtBoxcodi.Text;
 
-            // Crear una instancia del formulario GestorTrabajo
-            Descuentos descuentosForm = new Descuentos();
-
-            // Suscribirse al evento FormClosed del formulario Descuentos
-            descuentosForm.FormClosed += (s, args) =>
+            // Verificar si el código es válido antes de abrir el formulario de descuentos
+            if (!string.IsNullOrEmpty(valorParaTransferir) && int.TryParse(valorParaTransferir, out _))
             {
-                // Cuando se cierre el formulario Descuentos, obtener el valor y asignarlo a txtBoxdescu
-                txtBoxdescu.Text = descuentosForm.ValorDescuento;
-            };
+                // Crear una instancia del formulario GestorTrabajo
+                Descuentos descuentosForm = new Descuentos();
 
-            // Configurar el valor de Codigo1 en el formulario GestorTrabajo
-            descuentosForm.Codigo2 = valorParaTransferir;
+                // Suscribirse al evento FormClosed del formulario Descuentos
+                descuentosForm.FormClosed += (s, args) =>
+                {
+                    // Cuando se cierre el formulario Descuentos, obtener el valor y asignarlo a txtBoxdescu
+                    txtBoxdescu.Text = descuentosForm.ValorDescuento;
+                };
 
-            // Mostrar el formulario Descuentos
-            descuentosForm.ShowDialog();
+                // Configurar el valor de Codigo1 en el formulario GestorTrabajo
+                descuentosForm.Codigo2 = valorParaTransferir;
 
-
-
+                // Mostrar el formulario Descuentos
+                descuentosForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Ingresa algun código válido.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
 
 
         private void txtBoxdescu_TextChanged(object sender, EventArgs e)
         {
+
             // Verificar si el texto en txtBoxdescu es un número válido
             if (decimal.TryParse(txtBoxdescu.Text, out decimal descuento))
             {
                 // Obtener el valor total en moneda peruana y quitar el símbolo "S/"
                 string valorTotalConSimbolo = txtBoxtotalc0.Text.Trim();
-                decimal valorTotal = decimal.Parse(valorTotalConSimbolo.Replace("S/", "").Trim(), CultureInfo.GetCultureInfo("es-PE"));
 
-                // Calcular el nuevo total restando el descuento
-                decimal nuevoTotal = valorTotal - descuento;
+                // Validar que el valor total tenga un formato válido antes de intentar convertir
+                if (decimal.TryParse(valorTotalConSimbolo.Replace("S/", "").Trim(), out decimal valorTotal))
+                {
+                    // Calcular el nuevo total restando el descuento
+                    decimal nuevoTotal = valorTotal - descuento;
 
-                // Mostrar el nuevo total en txtBoxtotalc0 con formato de moneda peruana
-                CultureInfo culture = new CultureInfo("es-PE");
-                txtBoxtotalc0.Text = nuevoTotal.ToString("C", culture);
+                    // Mostrar el nuevo total en txtBoxtotalc0 con formato de moneda peruana
+                    CultureInfo culture = new CultureInfo("es-PE");
+                    txtBoxtotalc0.Text = nuevoTotal.ToString("C", culture);
+                }
+                else
+                {
+                    // El valor total no es un número decimal válido, puedes mostrar un mensaje de error o tomar alguna acción.
+                    txtBoxtotalc0.Text = string.Empty;
+                }
             }
             else
             {
-                // El texto en txtBoxdescu no es un número válido, puedes mostrar un mensaje de error o limpiar txtBoxtotalc0.
+                // El texto en txtBoxdescu no es un número decimal válido, puedes mostrar un mensaje de error o limpiar txtBoxtotalc0.
                 txtBoxtotalc0.Text = string.Empty;
             }
+            ObtenerYMostrarIGV();
+            MostrarTotalCompleto();
+            CalcularPuntos();
+            CalcularTotal(sender, e);
+            string codigoCliente = txtBoxcodi.Text;
+
+            // Llamar a MostrarPuntosCliente proporcionando el código del cliente
+            MostrarPuntosCliente(codigoCliente);
+            txtBoxRecibido_TextChanged(sender, e);
+
         }
 
         private void btnGenerarVaucher_Click(object sender, EventArgs e)
@@ -1962,8 +2242,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
                     Filter = "Archivos de texto (*.txt)|*.txt",
-                    Title = "Guardar Vaucher como",
-                    FileName = "vaucher.txt"
+                    Title = "Guardar Ticket como",
+                    FileName = "ticket.txt"
                 };
 
                 // Mostrar el cuadro de diálogo y verificar si el usuario hizo clic en "Guardar"
@@ -1978,7 +2258,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar el vaucher: " + ex.Message);
+                MessageBox.Show("Error al generar el Ticket: " + ex.Message);
             }
         }
 
@@ -1986,7 +2266,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             StringBuilder vaucherContent = new StringBuilder();
 
-            vaucherContent.AppendLine("================ VAUCHER ================");
+            vaucherContent.AppendLine("================ TICKET ================");
             vaucherContent.AppendLine();
 
             if (tipoTransaccion == "Proforma" && proformaData.Rows.Count > 0)
@@ -2011,7 +2291,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
             File.WriteAllText(rutaArchivo, vaucherContent.ToString());
 
-            MessageBox.Show("Vaucher generado con éxito en: " + rutaArchivo);
+            MessageBox.Show("Ticket generado exitosamente: " + rutaArchivo, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -2020,7 +2300,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             // Añadir información de la tabla ventas al vaucher
             vaucherContent.AppendLine();
-            vaucherContent.AppendLine($"Nombre Completo: {row["nom_completos"]}");
+            vaucherContent.AppendLine($"Cliente: {row["nom_completos"]}");
             vaucherContent.AppendLine($"DNI: {row["DNI"]}");
             vaucherContent.AppendLine($"RUC: {row["RUC"]}");
             vaucherContent.AppendLine();
@@ -2109,13 +2389,370 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         }
 
        
+        //Combos 0 de "," "."
 
-        
+        private void txtBoxcant0_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio0_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
 
 
+        //Combos 1 de "," "."
+        private void txtBoxcant1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 2 de "," "."
+        private void txtBoxcant2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 3 de "," "."
+        private void txtBoxcant3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 4 de "," "."
+        private void txtBoxcant4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 5 de "," "."
+        private void txtBoxcant5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 6 de "," "."
+        private void txtBoxcant6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 7 de "," "."
+        private void txtBoxcant7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 8 de "," "."
+        private void txtBoxcant8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Combos 9 de "," "."
+        private void txtBoxcant9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void txtBoxprecio9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
 
 
-        private void txtBoxcodi_TextChanged(object sender, EventArgs e)
+        //Cambios o vuelto
+        private void txtBoxRecibido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número, la tecla de retroceso, "." o ","
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número, la tecla de retroceso, "." ni ","
+            }
+
+            // Convertir "." a "," antes de realizar la conversión a decimal
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            }
+
+            // Verificar si ya hay una coma en el texto
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.Contains(','))
+            {
+                e.Handled = true; // Si ya hay una coma, bloquear la entrada de otra coma
+            }
+        }
+
+        //Telefono
+        private void txtBoxTelef_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si la tecla presionada es un número o la tecla de retroceso
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignorar la tecla si no es un número ni la tecla de retroceso
+            }
+        }
+
+        private void btnactualizar_Click(object sender, EventArgs e)
+        {
+            limpiartodo();
+        }
+
+        private void txtBoxprecio0_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+       
+
+        private void txtBoxprecio9_TextChanged(object sender, EventArgs e)
+        {
+
+        }   
+
+
+       private void txtBoxcodi_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -2160,7 +2797,15 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         }
 
-       
+        private void txtBoxcodi_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+        }
+
+        private void txtBoxcodi_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+        }
     }
 
 }
