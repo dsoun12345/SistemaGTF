@@ -134,7 +134,7 @@
             this.btnfechas.Name = "btnfechas";
             this.btnfechas.Size = new System.Drawing.Size(228, 52);
             this.btnfechas.TabIndex = 14;
-            this.btnfechas.Text = "Trabajos";
+            this.btnfechas.Text = "Búsqueda";
             this.btnfechas.UseVisualStyleBackColor = false;
             this.btnfechas.Click += new System.EventHandler(this.btnfechas_Click);
             // 
@@ -160,7 +160,7 @@
             this.btnTrabajo.Name = "btnTrabajo";
             this.btnTrabajo.Size = new System.Drawing.Size(228, 52);
             this.btnTrabajo.TabIndex = 13;
-            this.btnTrabajo.Text = "Actualizar";
+            this.btnTrabajo.Text = "Pendientes";
             this.btnTrabajo.UseVisualStyleBackColor = false;
             this.btnTrabajo.Click += new System.EventHandler(this.btnTrabajo_Click);
             // 

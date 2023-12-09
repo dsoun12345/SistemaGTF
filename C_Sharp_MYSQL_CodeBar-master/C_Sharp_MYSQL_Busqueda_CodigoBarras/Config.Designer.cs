@@ -102,6 +102,7 @@
             this.txtigvbd.ForeColor = System.Drawing.Color.White;
             this.txtigvbd.Location = new System.Drawing.Point(349, 138);
             this.txtigvbd.Name = "txtigvbd";
+            this.txtigvbd.ReadOnly = true;
             this.txtigvbd.Size = new System.Drawing.Size(180, 27);
             this.txtigvbd.TabIndex = 83;
             // 
@@ -171,6 +172,7 @@
             this.txtpuntosvalor.ForeColor = System.Drawing.Color.White;
             this.txtpuntosvalor.Location = new System.Drawing.Point(349, 284);
             this.txtpuntosvalor.Name = "txtpuntosvalor";
+            this.txtpuntosvalor.ReadOnly = true;
             this.txtpuntosvalor.Size = new System.Drawing.Size(180, 27);
             this.txtpuntosvalor.TabIndex = 88;
             // 

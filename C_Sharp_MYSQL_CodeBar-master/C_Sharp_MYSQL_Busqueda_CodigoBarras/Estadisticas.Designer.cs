@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Estadisticas));
             this.label1 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -48,6 +48,10 @@
             this.TotalDias = new System.Windows.Forms.RichTextBox();
             this.Totalventasdeldia = new System.Windows.Forms.RichTextBox();
             this.btnclientes = new System.Windows.Forms.Button();
+            this.btnmesdatos1 = new System.Windows.Forms.Button();
+            this.btnmesdatosno1 = new System.Windows.Forms.Button();
+            this.btnañodatosno1 = new System.Windows.Forms.Button();
+            this.btnañosdatos1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalMes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalAño)).BeginInit();
@@ -66,51 +70,51 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(-48, 121);
+            chartArea7.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart1.Legends.Add(legend7);
+            this.chart1.Location = new System.Drawing.Point(-53, 107);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1570, 587);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chart1.Series.Add(series7);
+            this.chart1.Size = new System.Drawing.Size(1595, 587);
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
             this.chart1.Visible = false;
             // 
             // TotalMes
             // 
-            chartArea2.Name = "ChartArea1";
-            this.TotalMes.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.TotalMes.Legends.Add(legend2);
-            this.TotalMes.Location = new System.Drawing.Point(-48, 121);
+            chartArea8.Name = "ChartArea1";
+            this.TotalMes.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.TotalMes.Legends.Add(legend8);
+            this.TotalMes.Location = new System.Drawing.Point(-53, 107);
             this.TotalMes.Name = "TotalMes";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.TotalMes.Series.Add(series2);
-            this.TotalMes.Size = new System.Drawing.Size(1570, 587);
+            series8.ChartArea = "ChartArea1";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.TotalMes.Series.Add(series8);
+            this.TotalMes.Size = new System.Drawing.Size(1595, 587);
             this.TotalMes.TabIndex = 30;
             this.TotalMes.Text = "chart2";
             this.TotalMes.Visible = false;
             // 
             // TotalAño
             // 
-            chartArea3.Name = "ChartArea1";
-            this.TotalAño.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.TotalAño.Legends.Add(legend3);
-            this.TotalAño.Location = new System.Drawing.Point(-48, 121);
+            chartArea9.Name = "ChartArea1";
+            this.TotalAño.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.TotalAño.Legends.Add(legend9);
+            this.TotalAño.Location = new System.Drawing.Point(-54, 107);
             this.TotalAño.Name = "TotalAño";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.TotalAño.Series.Add(series3);
-            this.TotalAño.Size = new System.Drawing.Size(1570, 587);
+            series9.ChartArea = "ChartArea1";
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.TotalAño.Series.Add(series9);
+            this.TotalAño.Size = new System.Drawing.Size(1595, 587);
             this.TotalAño.TabIndex = 31;
             this.TotalAño.Text = "chart3";
             this.TotalAño.Visible = false;
@@ -219,12 +223,96 @@
             this.btnclientes.UseVisualStyleBackColor = false;
             this.btnclientes.Click += new System.EventHandler(this.btnclientes_Click);
             // 
+            // btnmesdatos1
+            // 
+            this.btnmesdatos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnmesdatos1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnmesdatos1.FlatAppearance.BorderSize = 0;
+            this.btnmesdatos1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnmesdatos1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnmesdatos1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnmesdatos1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnmesdatos1.Image = ((System.Drawing.Image)(resources.GetObject("btnmesdatos1.Image")));
+            this.btnmesdatos1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnmesdatos1.Location = new System.Drawing.Point(1179, 27);
+            this.btnmesdatos1.Name = "btnmesdatos1";
+            this.btnmesdatos1.Size = new System.Drawing.Size(130, 57);
+            this.btnmesdatos1.TabIndex = 57;
+            this.btnmesdatos1.Text = "    Datos";
+            this.btnmesdatos1.UseVisualStyleBackColor = false;
+            this.btnmesdatos1.Visible = false;
+            this.btnmesdatos1.Click += new System.EventHandler(this.btnmesdatos1_Click);
+            // 
+            // btnmesdatosno1
+            // 
+            this.btnmesdatosno1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnmesdatosno1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnmesdatosno1.FlatAppearance.BorderSize = 0;
+            this.btnmesdatosno1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnmesdatosno1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnmesdatosno1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnmesdatosno1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnmesdatosno1.Image = ((System.Drawing.Image)(resources.GetObject("btnmesdatosno1.Image")));
+            this.btnmesdatosno1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnmesdatosno1.Location = new System.Drawing.Point(1179, 27);
+            this.btnmesdatosno1.Name = "btnmesdatosno1";
+            this.btnmesdatosno1.Size = new System.Drawing.Size(130, 57);
+            this.btnmesdatosno1.TabIndex = 58;
+            this.btnmesdatosno1.Text = "    Datos";
+            this.btnmesdatosno1.UseVisualStyleBackColor = false;
+            this.btnmesdatosno1.Visible = false;
+            this.btnmesdatosno1.Click += new System.EventHandler(this.btnmesdatosno1_Click);
+            // 
+            // btnañodatosno1
+            // 
+            this.btnañodatosno1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnañodatosno1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnañodatosno1.FlatAppearance.BorderSize = 0;
+            this.btnañodatosno1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnañodatosno1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnañodatosno1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnañodatosno1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnañodatosno1.Image = ((System.Drawing.Image)(resources.GetObject("btnañodatosno1.Image")));
+            this.btnañodatosno1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnañodatosno1.Location = new System.Drawing.Point(1179, 27);
+            this.btnañodatosno1.Name = "btnañodatosno1";
+            this.btnañodatosno1.Size = new System.Drawing.Size(130, 57);
+            this.btnañodatosno1.TabIndex = 59;
+            this.btnañodatosno1.Text = "    Datos";
+            this.btnañodatosno1.UseVisualStyleBackColor = false;
+            this.btnañodatosno1.Visible = false;
+            this.btnañodatosno1.Click += new System.EventHandler(this.btnañodatosno1_Click);
+            // 
+            // btnañosdatos1
+            // 
+            this.btnañosdatos1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.btnañosdatos1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnañosdatos1.FlatAppearance.BorderSize = 0;
+            this.btnañosdatos1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(211)))), ((int)(((byte)(6)))));
+            this.btnañosdatos1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnañosdatos1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnañosdatos1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnañosdatos1.Image = ((System.Drawing.Image)(resources.GetObject("btnañosdatos1.Image")));
+            this.btnañosdatos1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnañosdatos1.Location = new System.Drawing.Point(1179, 28);
+            this.btnañosdatos1.Name = "btnañosdatos1";
+            this.btnañosdatos1.Size = new System.Drawing.Size(130, 57);
+            this.btnañosdatos1.TabIndex = 60;
+            this.btnañosdatos1.Text = "    Datos";
+            this.btnañosdatos1.UseVisualStyleBackColor = false;
+            this.btnañosdatos1.Visible = false;
+            this.btnañosdatos1.Click += new System.EventHandler(this.btnañosdatos1_Click);
+            // 
             // Estadisticas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1354, 846);
+            this.Controls.Add(this.btnañosdatos1);
+            this.Controls.Add(this.btnañodatosno1);
+            this.Controls.Add(this.btnmesdatosno1);
+            this.Controls.Add(this.btnmesdatos1);
             this.Controls.Add(this.btnclientes);
             this.Controls.Add(this.Totalventasdeldia);
             this.Controls.Add(this.TotalDias);
@@ -259,5 +347,9 @@
         private System.Windows.Forms.RichTextBox TotalDias;
         private System.Windows.Forms.RichTextBox Totalventasdeldia;
         private System.Windows.Forms.Button btnclientes;
+        private System.Windows.Forms.Button btnmesdatos1;
+        private System.Windows.Forms.Button btnmesdatosno1;
+        private System.Windows.Forms.Button btnañodatosno1;
+        private System.Windows.Forms.Button btnañosdatos1;
     }
 }

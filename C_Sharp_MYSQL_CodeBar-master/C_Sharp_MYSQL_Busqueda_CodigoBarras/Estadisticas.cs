@@ -18,14 +18,12 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 {
     public partial class Estadisticas : Form
     {
-        
-
         public Estadisticas()
         {
             InitializeComponent();
         }
 
-       
+
         private void MostrarGraficoDePuntos()
         {
             string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
@@ -46,7 +44,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     List<string> razonesSociales = new List<string>();
                     List<int?> puntosTotales = new List<int?>();
 
-                    // Bandera para indicar si hay clientes sin puntos
                     bool hayClientesSinPuntos = false;
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -62,7 +59,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                             if (puntos == null)
                             {
-                             
+
                                 hayClientesSinPuntos = true;
                             }
                         }
@@ -93,21 +90,20 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     chart1.ChartAreas[0].AxisX.Title = "Razón Social";
                     chart1.ChartAreas[0].AxisY.Title = "Puntos Totales";
 
-                    // Configurar el gráfico
 
-                    // Configurar el tamaño de letra de la leyenda
+                    // Configura el gráfico
+
+                    // Configura el tamaño de letra de la leyenda
                     chart1.Legends[0].Font = new Font("Arial", 8);
 
                     chart1.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12, FontStyle.Bold);
                     chart1.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
 
-                    // Configurar el tamaño de letra de los elementos del eje X e Y
+                    // Configura el tamaño de letra de los elementos del eje X e Y
                     chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12);
                     chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Arial", 12);
                     chart1.ChartAreas[0].AxisX.Interval = 1; // Puedes ajustar el valor según tus necesidades
 
-
-                    // Mostrar MessageBox si hay clientes sin puntos
                     if (hayClientesSinPuntos)
                     {
                         MessageBox.Show("Algunos usuarios no tienen puntos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -124,6 +120,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
+
         private void MostrarGraficoVentasPorDia()
         {
             string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
@@ -134,7 +131,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 {
                     connection.Open();
 
-                    // Filtrar ventas para el día actual
+                    // Filtra ventas para el día actual
                     DateTime fechaActual = DateTime.Now.Date;
                     string formattedFechaActual = fechaActual.ToString("yyyy-MM-dd");
 
@@ -157,8 +154,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                         if (reader.Read())
                         {
-                            string fecha = reader.GetDateTime(0).ToShortDateString(); // Usar el índice en lugar del nombre de columna
-                            decimal? totalVentas = reader.IsDBNull(1) ? (decimal?)null : reader.GetDecimal(1); // Verificar si el valor es Null
+                            string fecha = reader.GetDateTime(0).ToShortDateString();
+                            decimal? totalVentas = reader.IsDBNull(1) ? (decimal?)null : reader.GetDecimal(1);
                             int cantidadVentas = reader.GetInt32(2);
                             string comprador = reader.GetString(3);
 
@@ -169,10 +166,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                                                  $"Cantidad de Ventas: {cantidadVentas}\n\n" +
                                                  $"Gasto del Cliente: {(totalVentas.HasValue ? $"S/. {totalVentas:F2}" : "No disponible")}\n\n";
 
-                            // Agregar texto al RichTextBox
+
                             TotalDias.AppendText(estadistica);
 
-                            // Aplicar negrita a los elementos específicos después de agregar el texto
+                            // Aplica negrita a los elementos específicos después de agregar el texto
                             TotalDias.Select(TotalDias.Text.IndexOf("Ventas del Día"), "Ventas del Día".Length);
                             TotalDias.SelectionFont = new Font(TotalDias.Font.FontFamily, 16, FontStyle.Bold);
 
@@ -192,7 +189,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         }
                         else
                         {
-                            // Mostrar mensaje si no hay datos disponibles
                             TotalDias.AppendText("No hay datos disponibles para mostrar.");
                             MessageBox.Show("No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
@@ -231,19 +227,19 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                         if (reader.Read())
                         {
-                            // Verificar si el valor es nulo antes de intentar leerlo
+                            // Verifica si el valor es nulo antes de intentar leerlo
                             decimal totalVentasDia = reader.IsDBNull(reader.GetOrdinal("totalVentasDia")) ? 0 : reader.GetDecimal("totalVentasDia");
                             int cantidadTotalVentas = reader.IsDBNull(reader.GetOrdinal("cantidadTotalVentas")) ? 0 : reader.GetInt32("cantidadTotalVentas");
 
-                            if (cantidadTotalVentas > 0) // Verificar si hay datos antes de mostrarlos
+                            if (cantidadTotalVentas > 0)
                             {
-                                // Mostrar la suma total en el RichTextBox con negrita
+                                // Muestra la suma total en el RichTextBox con negrita
                                 Totalventasdeldia.AppendText($"\nSuma Total: S/. {totalVentasDia:F2}\n\n");
 
-                                // Mostrar la cantidad total de ventas en el RichTextBox correspondiente con negrita
+                                // Muestra la cantidad total de ventas en el RichTextBox
                                 Totalventasdeldia.AppendText($"Cantidad Total de Ventas: {cantidadTotalVentas}\n");
 
-                                // Aplicar negrita a los elementos específicos después de agregar el texto
+                                // Aplica negrita a los elementos específicos después de agregar el texto
                                 Totalventasdeldia.Select(Totalventasdeldia.Text.IndexOf("Suma Total:"), "Suma Total:".Length);
                                 Totalventasdeldia.SelectionFont = new Font(Totalventasdeldia.Font, FontStyle.Bold);
 
@@ -252,7 +248,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             }
                             else
                             {
-                                // Mostrar mensaje si no hay datos disponibles
                                 Totalventasdeldia.AppendText("No hay datos disponibles para mostrar.");
                             }
                         }
@@ -307,8 +302,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         }
                     }
 
-                    // Cerrar el DataReader después de cargar los datos
-                    // Esto permite abrir un nuevo DataReader para la siguiente consulta
+                    // Permite abrir un nuevo DataReader para la siguiente consulta
                     cmdTotalVentas.Dispose();
 
                     foreach (var venta in ventasPorDia)
@@ -352,7 +346,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             TotalMes.Series.Add(seriesMejorCliente);
                         }
 
-                        // Obtener el mejor cliente para el día actual
+                        // Obtiene el mejor cliente para el día actual
                         string mejorComprador = ObtenerMejorClienteParaDia(connection, añoActual, mesActual, dia);
                         var detalleMejorCliente = ObtenerDetalleMejorCliente(connection, añoActual, mesActual, dia, mejorComprador);
 
@@ -362,35 +356,35 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         //seriesMejorCliente.Color = Color.Yellow;
                         seriesMejorCliente.Points.AddXY($"Día {dia}", detalleMejorCliente.GastoTotal);
 
-                        // Agregar etiquetas de datos personalizadas
-                        seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
-                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
+                        // Agrega etiquetas de datos
+                        //seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        //seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
 
-                        seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
-                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
+                        //seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
+                        //seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
                     }
                 }
 
-                // Configurar el gráfico
-
-                // Configurar el tamaño de letra de la leyenda
+                // Configura el gráfico
+                // Configura el tamaño de letra de la leyenda
                 TotalMes.Legends[0].Font = new Font("Arial", 7);
 
                 // Ajusta la fuente del título del gráfico
                 string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesActual);
                 nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
-                TotalMes.Titles.Add($"Ventas por Dia del Mes ({nombreMes})");
+                TotalMes.Titles.Add($"Reporte de Ventas ({nombreMes})");
                 TotalMes.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
 
                 // Configura el tamaño de letra del título del eje Y
-                TotalMes.ChartAreas[0].AxisY.Title = "Cantidad de Ventas";
+                TotalMes.ChartAreas[0].AxisY.Title = "Ventas en Soles";
                 TotalMes.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
 
                 // Configura el tamaño de letra del título del eje X
                 TotalMes.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12, FontStyle.Bold);
                 TotalMes.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
                 TotalMes.ChartAreas[0].AxisX.Interval = 1;
-                // Ajustar el espacio entre las barras
+
+                // Ajusta el espacio entre las barras
                 TotalMes.Series["SumaTotal"]["PointWidth"] = "0.3";
                 TotalMes.Series["MejorCliente"]["PointWidth"] = "0.3";
             }
@@ -431,8 +425,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         return (totalVentas, cantidadCompras, gastoTotal);
                     }
                 }
-
-                // Si no hay datos, devolver valores predeterminados
                 return (0, 0, 0);
             }
             catch (SqlException ex)
@@ -527,8 +519,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         }
                     }
 
-                    // Cerrar el DataReader después de cargar los datos
-                    // Esto permite abrir un nuevo DataReader para la siguiente consulta
                     cmdTotalVentas.Dispose();
 
                     foreach (var venta in ventasPorMes)
@@ -573,56 +563,54 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             TotalAño.Series.Add(seriesMejorCliente);
                         }
 
-                        // Obtener el mejor cliente para el mes actual
+                        // Obtiene el mejor cliente para el mes actual
                         string mejorComprador = ObtenerMejorClienteParaMes(connection, añoActual, mes);
                         var detalleMejorCliente = ObtenerDetalleMejorClientePorMes(connection, añoActual, mes, mejorComprador);
 
-                        // Obtener el nombre del mes en lugar del número
+                        // Obtiene el nombre del mes en lugar del número
                         string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes);
                         nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
-                        // Modificar la línea donde se añade el punto al gráfico
 
+                        // Modifica la línea donde se añade el punto al gráfico
                         //seriesSumaTotal.Color = Color.Blue;
                         seriesSumaTotal.Points.AddXY(nombreMes, sumaTotal);
 
                         //seriesMejorCliente.Color = Color.Yellow;
                         seriesMejorCliente.Points.AddXY(nombreMes, detalleMejorCliente.GastoTotal);
 
-                        // Configurar el tamaño de letra del texto encima de las barras
+                        // Configura el tamaño de letra del texto encima de las barras
+                        seriesSumaTotal.Points.Last().LabelForeColor = Color.Black;
+                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
 
-                        seriesSumaTotal.Points.Last().LabelForeColor = Color.Black; // Puedes ajustar el color del texto si es necesario
-                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8); // Ajusta la fuente del texto encima de las barras
+                        seriesMejorCliente.Points.Last().LabelForeColor = Color.Black;
+                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
 
-                        seriesMejorCliente.Points.Last().LabelForeColor = Color.Black; // Puedes ajustar el color del texto si es necesario
-                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8); // Ajusta la fuente del texto encima de las barras
+                        // Agrega etiquetas de datos
+                        //seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        //seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
 
-                        // Agregar etiquetas de datos personalizadas
-                        seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
-                        seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
-
-                        // Ajustar el espacio entre las barras
+                        // Ajusta el espacio entre las barras
                         TotalAño.Series["SumaTotal"]["PointWidth"] = "0.6";
                         TotalAño.Series["MejorCliente"]["PointWidth"] = "0.6";
-                       
+
                     }
                 }
 
-                // Configurar el gráfico
-
+                // Configura el gráfico
                 // Ajusta la fuente de la leyenda
                 TotalAño.Legends[0].Font = new Font("Arial", 8);
 
                 // Ajusta la fuente del título del gráfico
-                TotalAño.Titles.Add($"Ventas por Mes del Año {añoActual}");
+                TotalAño.Titles.Add($"Reporte de Ventas del {añoActual}");
                 TotalAño.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
 
                 // Configura el tamaño de letra del título del eje Y
-                TotalAño.ChartAreas[0].AxisY.Title = "Cantidad de Ventas";
+                TotalAño.ChartAreas[0].AxisY.Title = "Ventas en Soles";
                 TotalAño.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
 
                 // Configura el tamaño de letra del título del eje X
                 TotalAño.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 10, FontStyle.Bold);
-                TotalAño.ChartAreas[0].AxisX.LabelStyle.Angle = -45; 
+                TotalAño.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
                 TotalAño.ChartAreas[0].AxisX.Interval = 1;
 
             }
@@ -635,6 +623,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private string ObtenerMejorClienteParaMes(MySqlConnection connection, int año, int mes)
         {
@@ -666,13 +655,11 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             catch (MySqlException ex)
             {
-                // Manejar excepciones específicas de MySQL
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return string.Empty;
             }
             catch (Exception ex)
             {
-                // Manejar otras excepciones generales
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return string.Empty;
             }
@@ -703,19 +690,15 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         return (gastoTotal, cantidadCompras);
                     }
                 }
-
-                // Si no hay datos, devolver valores predeterminados
                 return (0, 0);
             }
             catch (MySqlException ex)
             {
-                // Manejar excepciones específicas de MySQL
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return (0, 0);
             }
             catch (Exception ex)
             {
-                // Manejar otras excepciones generales
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return (0, 0);
             }
@@ -728,7 +711,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             TotalDias.Visible = true;
             Totalventasdeldia.Visible = true;
             TotalMes.Visible = false;
-
+            btnmesdatos1.Visible = false;
+            btnmesdatosno1.Visible = false;
+            btnañosdatos1.Visible = false;
+            btnañodatosno1.Visible=false;
             MostrarGraficoVentasPorDia();
             MostrarSumaTotalVentasPorDia();
         }
@@ -739,7 +725,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             TotalAño.Visible = false;
             TotalDias.Visible = false;
             TotalMes.Visible = true;
+            btnmesdatos1.Visible = true;
             Totalventasdeldia.Visible = false;
+            btnañosdatos1.Visible = false;
+            btnañodatosno1.Visible = false;
             MostrarGraficoVentasPorMes();
         }
 
@@ -750,6 +739,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             TotalDias.Visible = false;
             TotalMes.Visible = false;
             Totalventasdeldia.Visible = false;
+            btnmesdatos1.Visible = false;
+            btnmesdatosno1.Visible = false;
+            btnañosdatos1.Visible = true;
+            btnañodatosno1.Visible = false;
             MostrarGraficoVentasPorAño();
         }
 
@@ -760,13 +753,592 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             TotalDias.Visible = false;
             TotalMes.Visible = false;
             Totalventasdeldia.Visible = false;
+            btnmesdatos1.Visible = false;
+            btnmesdatosno1.Visible = false;
+            btnañosdatos1.Visible = false;
+            btnañodatosno1.Visible = false;
             MostrarGraficoDePuntos();
+        }
+
+        
+        private void btnmesdatos1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TotalMes.Series.Clear();
+                TotalMes.ChartAreas.Clear();
+                TotalMes.Titles.Clear();
+
+                int añoActual = DateTime.Now.Year;
+                int mesActual = DateTime.Now.Month;
+
+                string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string queryTotalVentas = $@"
+                SELECT DAY(fecha_facturacion) AS dia,
+                       COUNT(*) AS cantidad_ventas,
+                       SUM(total) AS suma_total
+                FROM gestion_ventas
+                WHERE YEAR(fecha_facturacion) = {añoActual} AND MONTH(fecha_facturacion) = {mesActual}
+                GROUP BY dia
+                ORDER BY dia
+            ";
+
+                    MySqlCommand cmdTotalVentas = new MySqlCommand(queryTotalVentas, connection);
+
+                    List<(int Dia, decimal SumaTotal, int CantidadVentas)> ventasPorDia = new List<(int Dia, decimal SumaTotal, int CantidadVentas)>();
+
+                    using (MySqlDataReader reader = cmdTotalVentas.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int dia = reader.GetInt32("dia");
+                            decimal sumaTotal = reader.GetDecimal("suma_total");
+                            int cantidadVentas = reader.GetInt32("cantidad_ventas");
+                            ventasPorDia.Add((dia, sumaTotal, cantidadVentas));
+                        }
+                    }
+
+                    // Permite abrir un nuevo DataReader para la siguiente consulta
+                    cmdTotalVentas.Dispose();
+
+                    foreach (var venta in ventasPorDia)
+                    {
+                        int dia = venta.Dia;
+                        decimal sumaTotal = venta.SumaTotal;
+                        int cantidadVentas = venta.CantidadVentas;
+
+                        if (TotalMes.ChartAreas.Count == 0)
+                        {
+                            ChartArea chartArea = new ChartArea();
+                            TotalMes.ChartAreas.Add(chartArea);
+                        }
+
+                        Series seriesSumaTotal = null;
+                        Series seriesMejorCliente = null;
+
+                        foreach (Series s in TotalMes.Series)
+                        {
+                            if (s.Name == "SumaTotal")
+                            {
+                                seriesSumaTotal = s;
+                            }
+                            else if (s.Name == "MejorCliente")
+                            {
+                                seriesMejorCliente = s;
+                            }
+                        }
+
+                        if (seriesSumaTotal == null)
+                        {
+                            seriesSumaTotal = new Series("SumaTotal");
+                            seriesSumaTotal.ChartType = SeriesChartType.Column;
+                            TotalMes.Series.Add(seriesSumaTotal);
+                        }
+
+                        if (seriesMejorCliente == null)
+                        {
+                            seriesMejorCliente = new Series("MejorCliente");
+                            seriesMejorCliente.ChartType = SeriesChartType.Column;
+                            TotalMes.Series.Add(seriesMejorCliente);
+                        }
+
+                        // Obtiene el mejor cliente para el día actual
+                        string mejorComprador = ObtenerMejorClienteParaDia(connection, añoActual, mesActual, dia);
+                        var detalleMejorCliente = ObtenerDetalleMejorCliente(connection, añoActual, mesActual, dia, mejorComprador);
+
+                        //seriesSumaTotal.Color = Color.Blue;
+                        seriesSumaTotal.Points.AddXY($"Día {dia}", sumaTotal);
+
+                        //seriesMejorCliente.Color = Color.Yellow;
+                        seriesMejorCliente.Points.AddXY($"Día {dia}", detalleMejorCliente.GastoTotal);
+
+                        // Agrega etiquetas de datos
+                        seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
+
+                        seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
+                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
+                    }
+                }
+
+                // Configura el gráfico
+                // Configura el tamaño de letra de la leyenda
+                TotalMes.Legends[0].Font = new Font("Arial", 7);
+
+                // Ajusta la fuente del título del gráfico
+                string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesActual);
+                nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
+                TotalMes.Titles.Add($"Reporte de Ventas ({nombreMes})");
+                TotalMes.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje Y
+                TotalMes.ChartAreas[0].AxisY.Title = "Ventas en Soles";
+                TotalMes.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje X
+                TotalMes.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12, FontStyle.Bold);
+                TotalMes.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+                TotalMes.ChartAreas[0].AxisX.Interval = 1;
+
+                // Ajusta el espacio entre las barras
+                TotalMes.Series["SumaTotal"]["PointWidth"] = "0.3";
+                TotalMes.Series["MejorCliente"]["PointWidth"] = "0.3";
+
+
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            btnmesdatos1.Visible = false;
+            btnmesdatosno1.Visible = true;
+        }
+
+        private void btnmesdatosno1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TotalMes.Series.Clear();
+                TotalMes.ChartAreas.Clear();
+                TotalMes.Titles.Clear();
+
+                int añoActual = DateTime.Now.Year;
+                int mesActual = DateTime.Now.Month;
+
+                string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string queryTotalVentas = $@"
+                SELECT DAY(fecha_facturacion) AS dia,
+                       COUNT(*) AS cantidad_ventas,
+                       SUM(total) AS suma_total
+                FROM gestion_ventas
+                WHERE YEAR(fecha_facturacion) = {añoActual} AND MONTH(fecha_facturacion) = {mesActual}
+                GROUP BY dia
+                ORDER BY dia
+            ";
+
+                    MySqlCommand cmdTotalVentas = new MySqlCommand(queryTotalVentas, connection);
+
+                    List<(int Dia, decimal SumaTotal, int CantidadVentas)> ventasPorDia = new List<(int Dia, decimal SumaTotal, int CantidadVentas)>();
+
+                    using (MySqlDataReader reader = cmdTotalVentas.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int dia = reader.GetInt32("dia");
+                            decimal sumaTotal = reader.GetDecimal("suma_total");
+                            int cantidadVentas = reader.GetInt32("cantidad_ventas");
+                            ventasPorDia.Add((dia, sumaTotal, cantidadVentas));
+                        }
+                    }
+
+                    // Permite abrir un nuevo DataReader para la siguiente consulta
+                    cmdTotalVentas.Dispose();
+
+                    foreach (var venta in ventasPorDia)
+                    {
+                        int dia = venta.Dia;
+                        decimal sumaTotal = venta.SumaTotal;
+                        int cantidadVentas = venta.CantidadVentas;
+
+                        if (TotalMes.ChartAreas.Count == 0)
+                        {
+                            ChartArea chartArea = new ChartArea();
+                            TotalMes.ChartAreas.Add(chartArea);
+                        }
+
+                        Series seriesSumaTotal = null;
+                        Series seriesMejorCliente = null;
+
+                        foreach (Series s in TotalMes.Series)
+                        {
+                            if (s.Name == "SumaTotal")
+                            {
+                                seriesSumaTotal = s;
+                            }
+                            else if (s.Name == "MejorCliente")
+                            {
+                                seriesMejorCliente = s;
+                            }
+                        }
+
+                        if (seriesSumaTotal == null)
+                        {
+                            seriesSumaTotal = new Series("SumaTotal");
+                            seriesSumaTotal.ChartType = SeriesChartType.Column;
+                            TotalMes.Series.Add(seriesSumaTotal);
+                        }
+
+                        if (seriesMejorCliente == null)
+                        {
+                            seriesMejorCliente = new Series("MejorCliente");
+                            seriesMejorCliente.ChartType = SeriesChartType.Column;
+                            TotalMes.Series.Add(seriesMejorCliente);
+                        }
+
+                        // Obtiene el mejor cliente para el día actual
+                        string mejorComprador = ObtenerMejorClienteParaDia(connection, añoActual, mesActual, dia);
+                        var detalleMejorCliente = ObtenerDetalleMejorCliente(connection, añoActual, mesActual, dia, mejorComprador);
+
+                        //seriesSumaTotal.Color = Color.Blue;
+                        seriesSumaTotal.Points.AddXY($"Día {dia}", sumaTotal);
+
+                        //seriesMejorCliente.Color = Color.Yellow;
+                        seriesMejorCliente.Points.AddXY($"Día {dia}", detalleMejorCliente.GastoTotal);
+
+                        // Agrega etiquetas de datos
+                        //seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        //seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
+
+                        //seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
+                        //seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
+                    }
+                }
+
+                // Configura el gráfico
+                // Configura el tamaño de letra de la leyenda
+                TotalMes.Legends[0].Font = new Font("Arial", 7);
+
+                // Ajusta la fuente del título del gráfico
+                string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesActual);
+                nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
+                TotalMes.Titles.Add($"Reporte de Ventas ({nombreMes})");
+                TotalMes.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje Y
+                TotalMes.ChartAreas[0].AxisY.Title = "Ventas en Soles";
+                TotalMes.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje X
+                TotalMes.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 12, FontStyle.Bold);
+                TotalMes.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+                TotalMes.ChartAreas[0].AxisX.Interval = 1;
+
+                // Ajusta el espacio entre las barras
+                TotalMes.Series["SumaTotal"]["PointWidth"] = "0.3";
+                TotalMes.Series["MejorCliente"]["PointWidth"] = "0.3";
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            btnmesdatosno1.Visible = false;
+            btnmesdatos1.Visible = true;
+        }
+
+        private void btnañosdatos1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TotalAño.Series.Clear();
+                TotalAño.ChartAreas.Clear();
+                TotalAño.Titles.Clear();
+
+                int añoActual = DateTime.Now.Year;
+
+                string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string queryTotalVentas = $@"
+                SELECT MONTH(fecha_facturacion) AS mes,
+                       COUNT(*) AS cantidad_ventas,
+                       SUM(total) AS suma_total
+                FROM gestion_ventas
+                WHERE YEAR(fecha_facturacion) = {añoActual}
+                GROUP BY mes
+                ORDER BY mes
+            ";
+
+                    MySqlCommand cmdTotalVentas = new MySqlCommand(queryTotalVentas, connection);
+
+                    List<(int Mes, decimal SumaTotal, int CantidadVentas)> ventasPorMes = new List<(int Mes, decimal SumaTotal, int CantidadVentas)>();
+
+                    using (MySqlDataReader reader = cmdTotalVentas.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int mes = reader.GetInt32("mes");
+                            decimal sumaTotal = reader.GetDecimal("suma_total");
+                            int cantidadVentas = reader.GetInt32("cantidad_ventas");
+                            ventasPorMes.Add((mes, sumaTotal, cantidadVentas));
+                        }
+                    }
+
+                    cmdTotalVentas.Dispose();
+
+                    foreach (var venta in ventasPorMes)
+                    {
+
+                        int mes = venta.Mes;
+                        decimal sumaTotal = venta.SumaTotal;
+                        int cantidadVentas = venta.CantidadVentas;
+
+                        if (TotalAño.ChartAreas.Count == 0)
+                        {
+                            ChartArea chartArea = new ChartArea();
+                            TotalAño.ChartAreas.Add(chartArea);
+                        }
+
+                        Series seriesSumaTotal = null;
+                        Series seriesMejorCliente = null;
+
+                        foreach (Series s in TotalAño.Series)
+                        {
+                            if (s.Name == "SumaTotal")
+                            {
+                                seriesSumaTotal = s;
+                            }
+                            else if (s.Name == "MejorCliente")
+                            {
+                                seriesMejorCliente = s;
+                            }
+                        }
+
+                        if (seriesSumaTotal == null)
+                        {
+                            seriesSumaTotal = new Series("SumaTotal");
+                            seriesSumaTotal.ChartType = SeriesChartType.Column;
+                            TotalAño.Series.Add(seriesSumaTotal);
+                        }
+
+                        if (seriesMejorCliente == null)
+                        {
+                            seriesMejorCliente = new Series("MejorCliente");
+                            seriesMejorCliente.ChartType = SeriesChartType.Column;
+                            TotalAño.Series.Add(seriesMejorCliente);
+                        }
+
+                        // Obtiene el mejor cliente para el mes actual
+                        string mejorComprador = ObtenerMejorClienteParaMes(connection, añoActual, mes);
+                        var detalleMejorCliente = ObtenerDetalleMejorClientePorMes(connection, añoActual, mes, mejorComprador);
+
+                        // Obtiene el nombre del mes en lugar del número
+                        string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes);
+                        nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
+
+                        // Modifica la línea donde se añade el punto al gráfico
+                        //seriesSumaTotal.Color = Color.Blue;
+                        seriesSumaTotal.Points.AddXY(nombreMes, sumaTotal);
+
+                        //seriesMejorCliente.Color = Color.Yellow;
+                        seriesMejorCliente.Points.AddXY(nombreMes, detalleMejorCliente.GastoTotal);
+
+                        // Configura el tamaño de letra del texto encima de las barras
+                        seriesSumaTotal.Points.Last().LabelForeColor = Color.Black;
+                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
+
+                        seriesMejorCliente.Points.Last().LabelForeColor = Color.Black;
+                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
+
+                        // Agrega etiquetas de datos
+                        seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
+
+                        // Ajusta el espacio entre las barras
+                        TotalAño.Series["SumaTotal"]["PointWidth"] = "0.6";
+                        TotalAño.Series["MejorCliente"]["PointWidth"] = "0.6";
+
+                    }
+                }
+
+                // Configura el gráfico
+                // Ajusta la fuente de la leyenda
+                TotalAño.Legends[0].Font = new Font("Arial", 8);
+
+                // Ajusta la fuente del título del gráfico
+                TotalAño.Titles.Add($"Reporte de Ventas del {añoActual}");
+                TotalAño.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje Y
+                TotalAño.ChartAreas[0].AxisY.Title = "Ventas en Soles";
+                TotalAño.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje X
+                TotalAño.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+                TotalAño.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+                TotalAño.ChartAreas[0].AxisX.Interval = 1;
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            btnañosdatos1.Visible= false;
+            btnañodatosno1.Visible= true;
+        }
+
+        private void btnañodatosno1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TotalAño.Series.Clear();
+                TotalAño.ChartAreas.Clear();
+                TotalAño.Titles.Clear();
+
+                int añoActual = DateTime.Now.Year;
+
+                string connectionString = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string queryTotalVentas = $@"
+                SELECT MONTH(fecha_facturacion) AS mes,
+                       COUNT(*) AS cantidad_ventas,
+                       SUM(total) AS suma_total
+                FROM gestion_ventas
+                WHERE YEAR(fecha_facturacion) = {añoActual}
+                GROUP BY mes
+                ORDER BY mes
+            ";
+
+                    MySqlCommand cmdTotalVentas = new MySqlCommand(queryTotalVentas, connection);
+
+                    List<(int Mes, decimal SumaTotal, int CantidadVentas)> ventasPorMes = new List<(int Mes, decimal SumaTotal, int CantidadVentas)>();
+
+                    using (MySqlDataReader reader = cmdTotalVentas.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int mes = reader.GetInt32("mes");
+                            decimal sumaTotal = reader.GetDecimal("suma_total");
+                            int cantidadVentas = reader.GetInt32("cantidad_ventas");
+                            ventasPorMes.Add((mes, sumaTotal, cantidadVentas));
+                        }
+                    }
+
+                    cmdTotalVentas.Dispose();
+
+                    foreach (var venta in ventasPorMes)
+                    {
+
+                        int mes = venta.Mes;
+                        decimal sumaTotal = venta.SumaTotal;
+                        int cantidadVentas = venta.CantidadVentas;
+
+                        if (TotalAño.ChartAreas.Count == 0)
+                        {
+                            ChartArea chartArea = new ChartArea();
+                            TotalAño.ChartAreas.Add(chartArea);
+                        }
+
+                        Series seriesSumaTotal = null;
+                        Series seriesMejorCliente = null;
+
+                        foreach (Series s in TotalAño.Series)
+                        {
+                            if (s.Name == "SumaTotal")
+                            {
+                                seriesSumaTotal = s;
+                            }
+                            else if (s.Name == "MejorCliente")
+                            {
+                                seriesMejorCliente = s;
+                            }
+                        }
+
+                        if (seriesSumaTotal == null)
+                        {
+                            seriesSumaTotal = new Series("SumaTotal");
+                            seriesSumaTotal.ChartType = SeriesChartType.Column;
+                            TotalAño.Series.Add(seriesSumaTotal);
+                        }
+
+                        if (seriesMejorCliente == null)
+                        {
+                            seriesMejorCliente = new Series("MejorCliente");
+                            seriesMejorCliente.ChartType = SeriesChartType.Column;
+                            TotalAño.Series.Add(seriesMejorCliente);
+                        }
+
+                        // Obtiene el mejor cliente para el mes actual
+                        string mejorComprador = ObtenerMejorClienteParaMes(connection, añoActual, mes);
+                        var detalleMejorCliente = ObtenerDetalleMejorClientePorMes(connection, añoActual, mes, mejorComprador);
+
+                        // Obtiene el nombre del mes en lugar del número
+                        string nombreMes = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mes);
+                        nombreMes = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nombreMes);
+
+                        // Modifica la línea donde se añade el punto al gráfico
+                        //seriesSumaTotal.Color = Color.Blue;
+                        seriesSumaTotal.Points.AddXY(nombreMes, sumaTotal);
+
+                        //seriesMejorCliente.Color = Color.Yellow;
+                        seriesMejorCliente.Points.AddXY(nombreMes, detalleMejorCliente.GastoTotal);
+
+                        // Configura el tamaño de letra del texto encima de las barras
+                        seriesSumaTotal.Points.Last().LabelForeColor = Color.Black;
+                        seriesSumaTotal.Points.Last().Font = new Font("Arial", 8);
+
+                        seriesMejorCliente.Points.Last().LabelForeColor = Color.Black;
+                        seriesMejorCliente.Points.Last().Font = new Font("Arial", 8);
+
+                        // Agrega etiquetas de datos
+                        //seriesSumaTotal.Points.Last().Label = $"Suma Total: {sumaTotal}\nCantidad Ventas: {cantidadVentas}";
+                        //seriesMejorCliente.Points.Last().Label = $"Mejor Cliente: {mejorComprador}\nGasto del Cliente: {detalleMejorCliente.GastoTotal}\nCantidad Ventas: {detalleMejorCliente.CantidadCompras}";
+
+                        // Ajusta el espacio entre las barras
+                        TotalAño.Series["SumaTotal"]["PointWidth"] = "0.6";
+                        TotalAño.Series["MejorCliente"]["PointWidth"] = "0.6";
+
+                    }
+                }
+
+                // Configura el gráfico
+                // Ajusta la fuente de la leyenda
+                TotalAño.Legends[0].Font = new Font("Arial", 8);
+
+                // Ajusta la fuente del título del gráfico
+                TotalAño.Titles.Add($"Reporte de Ventas del {añoActual}");
+                TotalAño.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje Y
+                TotalAño.ChartAreas[0].AxisY.Title = "Ventas en Soles";
+                TotalAño.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12, FontStyle.Bold);
+
+                // Configura el tamaño de letra del título del eje X
+                TotalAño.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+                TotalAño.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+                TotalAño.ChartAreas[0].AxisX.Interval = 1;
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No hay datos disponibles para mostrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            btnañodatosno1.Visible = false;
+            btnañosdatos1.Visible = true;
         }
 
         private void Estadisticas_Load(object sender, EventArgs e)
         {
 
         }
-
     }
 }

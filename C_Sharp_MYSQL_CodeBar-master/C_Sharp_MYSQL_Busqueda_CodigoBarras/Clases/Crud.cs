@@ -67,7 +67,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
                 MySqlDataReader reader = MyCommand.ExecuteReader();
                 reader.Close();
 
-                // Añadir registros en la tabla puntos_A
+
                 string puntosQuery = "INSERT INTO puntos_A (dni, ruc) VALUES (@dni, @ruc)";
                 MySqlCommand puntosCommand = new MySqlCommand(puntosQuery, objConexion.establecerConexion());
                 puntosCommand.Parameters.AddWithValue("@dni", dniText);
@@ -95,10 +95,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
             {
                 id.Text = tablaCliente.CurrentRow.Cells["id"].Value.ToString();
                 dni.Text = tablaCliente.CurrentRow.Cells["dni"].Value.ToString();
-                ruc.Text = tablaCliente.CurrentRow.Cells["ruc"].Value.ToString(); // Agrega esta línea para cargar el campo RUC
+                ruc.Text = tablaCliente.CurrentRow.Cells["ruc"].Value.ToString();
                 nombres.Text = tablaCliente.CurrentRow.Cells["nombres"].Value.ToString();
                 apellidos.Text = tablaCliente.CurrentRow.Cells["apellidos"].Value.ToString();
-                razonSocial.Text = tablaCliente.CurrentRow.Cells["razon_social"].Value.ToString(); // Modifica el nombre de la columna
+                razonSocial.Text = tablaCliente.CurrentRow.Cells["razon_social"].Value.ToString();
                 direccion.Text = tablaCliente.CurrentRow.Cells["direccion"].Value.ToString();
                 telefono.Text = tablaCliente.CurrentRow.Cells["telefono"].Value.ToString();
             }
@@ -117,7 +117,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
             {
                 Conexion objConexion = new Conexion();
 
-                // Verificar la longitud del nuevo DNI
                 string nuevoDniText = dni.Text.Trim();
                 if (nuevoDniText.Length != 8)
                 {
@@ -125,7 +124,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
                     return;
                 }
 
-                // Verificar la longitud del nuevo RUC
                 string nuevoRucText = ruc.Text.Trim();
                 if (nuevoRucText.Length != 11)
                 {
@@ -147,7 +145,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
                 MySqlDataReader reader = MyCommand.ExecuteReader();
                 reader.Close();
 
-                // Modificar registros en la tabla puntos_A
                 string puntosQuery = "UPDATE puntos_A SET dni = @dni, ruc = @ruc WHERE id = @id";
                 MySqlCommand puntosCommand = new MySqlCommand(puntosQuery, objConexion.establecerConexion());
                 puntosCommand.Parameters.AddWithValue("@id", id.Text);
@@ -176,13 +173,13 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
             {
                 Conexion objConexion = new Conexion();
 
-                // Eliminar el cliente de la tabla cliente por su ID
+
                 string deleteClienteQuery = "DELETE FROM cliente WHERE id = @id";
                 MySqlCommand deleteClienteCommand = new MySqlCommand(deleteClienteQuery, objConexion.establecerConexion());
                 deleteClienteCommand.Parameters.AddWithValue("@id", id.Text);
                 deleteClienteCommand.ExecuteNonQuery();
 
-                // Eliminar el cliente de la tabla puntos_A por su ID
+
                 string deletePuntosQuery = "DELETE FROM puntos_A WHERE id = @id";
                 MySqlCommand deletePuntosCommand = new MySqlCommand(deletePuntosQuery, objConexion.establecerConexion());
                 deletePuntosCommand.Parameters.AddWithValue("@id", id.Text);

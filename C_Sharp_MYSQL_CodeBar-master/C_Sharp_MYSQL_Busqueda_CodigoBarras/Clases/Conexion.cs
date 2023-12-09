@@ -26,11 +26,11 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras.Clases
 
             try
             {
-                if (conex.State == ConnectionState.Closed) // Verifica si la conexión está cerrada
+                if (conex.State == ConnectionState.Closed)
                 {
                     conex.ConnectionString = cadenaConexion;
                     conex.Open();
-                    // MessageBox.Show("Se logró conectar a la Base de Datos");
+                    
                 }
             }
             catch (MySqlException e)

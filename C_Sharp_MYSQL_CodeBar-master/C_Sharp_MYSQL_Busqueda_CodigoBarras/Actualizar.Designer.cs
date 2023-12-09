@@ -60,7 +60,7 @@
             this.btnactualizar1.Name = "btnactualizar1";
             this.btnactualizar1.Size = new System.Drawing.Size(189, 52);
             this.btnactualizar1.TabIndex = 82;
-            this.btnactualizar1.Text = "Listar";
+            this.btnactualizar1.Text = "   Listar";
             this.btnactualizar1.UseVisualStyleBackColor = false;
             this.btnactualizar1.Click += new System.EventHandler(this.btnactualizar1_Click);
             // 
@@ -74,11 +74,11 @@
             this.btnguardarcambios.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnguardarcambios.Image = ((System.Drawing.Image)(resources.GetObject("btnguardarcambios.Image")));
             this.btnguardarcambios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnguardarcambios.Location = new System.Drawing.Point(1164, 47);
+            this.btnguardarcambios.Location = new System.Drawing.Point(1098, 47);
             this.btnguardarcambios.Name = "btnguardarcambios";
-            this.btnguardarcambios.Size = new System.Drawing.Size(178, 52);
+            this.btnguardarcambios.Size = new System.Drawing.Size(244, 52);
             this.btnguardarcambios.TabIndex = 83;
-            this.btnguardarcambios.Text = "Actualizar";
+            this.btnguardarcambios.Text = "     Actualizar Base";
             this.btnguardarcambios.UseVisualStyleBackColor = false;
             this.btnguardarcambios.Click += new System.EventHandler(this.btnguardarcambios_Click);
             // 

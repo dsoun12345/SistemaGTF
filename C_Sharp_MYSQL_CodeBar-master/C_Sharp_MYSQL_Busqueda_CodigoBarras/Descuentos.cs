@@ -35,7 +35,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private void MostrarPuntos()
         {
-            // Obtén el ID de txtcodigo1
+            // Obtiene el ID de txtcodigo1
             int idPuntosA;
             if (int.TryParse(txtcodigo2.Text, out idPuntosA))
             {
@@ -90,7 +90,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 else
                 {
-                    txtpuntosvalor.Text = ""; // También establece el campo de puntos en blanco si no hay registros
+                    txtpuntosvalor.Text = "";
                 }
 
                 reader.Close();
@@ -101,27 +101,11 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 MessageBox.Show("Se produjo un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        private void Descuentos_Load(object sender, EventArgs e)
-        {
-            MostrarPuntos();
-            CargarUltimoValores();
-        }
-
-        private void txtpuntosacumulados01_TextChanged(object sender, EventArgs e)
-        {
-            MostrarPuntos();
-        }
-
-        private void btnguardardatos1_Click(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private void btnAplicarDescuento_Click(object sender, EventArgs e)
         {
-            // Obtén los valores de los TextBox
+            // Obtiene los valores de los TextBox
             int idPuntosA;
             int puntosAcumulados;
             int puntosAplicados;
@@ -132,7 +116,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             {
                 if (puntosAplicados <= puntosAcumulados)
                 {
-                    // Actualiza la tabla puntos_A con los nuevos puntos acumulados
+                    // Actualiza la tabla de puntos con los nuevos puntos acumulados
                     try
                     {
                         Conexion objConexion = new Conexion();
@@ -149,10 +133,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             decimal descuento = (puntosAplicados * valorPuntos) / 100;
                             descuentoTotal += descuento;
 
-                            // Actualiza el TextBox con el valor total del descuento
+                            // Actualiza el txtvalordescu con el valor total del descuento
                             txtvalordescu.Text = descuentoTotal.ToString();
 
-                            // Actualiza la tabla puntos_A con los nuevos puntos acumulados
+                            // Actualiza la tabla de puntos con los nuevos puntos acumulados
                             string sqlUpdatePuntos = "UPDATE puntos_A SET puntos = @nuevosPuntos WHERE id = @id";
                             MySqlCommand cmdUpdatePuntos = new MySqlCommand(sqlUpdatePuntos, conn);
                             cmdUpdatePuntos.Parameters.AddWithValue("@nuevosPuntos", nuevosPuntosAcumulados);
@@ -162,7 +146,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                             if (rowsAffected > 0)
                             {
-                                // Actualización exitosa
                                 MessageBox.Show("Descuento aplicado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
@@ -193,11 +176,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
             MostrarPuntos();
         }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void Descuentos_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -227,6 +206,25 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
-        
+        private void Descuentos_Load(object sender, EventArgs e)
+        {
+            MostrarPuntos();
+            CargarUltimoValores();
+        }
+
+        private void txtpuntosacumulados01_TextChanged(object sender, EventArgs e)
+        {
+            MostrarPuntos();
+        }
+
+        private void btnguardardatos1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

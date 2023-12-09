@@ -15,18 +15,16 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 {
     public partial class Actualizar : Form
     {
-        // Agrega tu cadena de conexión a MySQL
+        // Conexión a MySQL
         private MySqlConnection conexion;
         private string cadenaConexion = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
         public Actualizar()
         {
             InitializeComponent();
-            // Inicializa tu conexión a la base de datos
             conexion = new MySqlConnection(cadenaConexion);
             try
             {
                 conexion.Open();
-                // Maneja la conexión a la base de datos
             }
             catch (MySqlException ex)
             {
@@ -41,29 +39,28 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             try
             {
                 string contenido = System.IO.File.ReadAllText(rutaArchivo);
-
-                // Limpia el contenido anterior
+               
                 txtTrabajosPen.Clear();
 
-                // Establece una fuente monoespaciada para alinear los datos
                 Font font = new Font("Courier New", 12);
 
                 // Divide el contenido en registros
                 string[] registros = contenido.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i < registros.Length - 1; i++) // Excluye el último registro
+                for (int i = 0; i < registros.Length - 1; i++)
                 {
                     string registro = registros[i];
+
                     // Divide el registro en campos utilizando la coma como separador
                     string[] campos = registro.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    // Agrega el número de registro en negrita y un número de fuente más grande
+                    // Agrega formatos
                     txtTrabajosPen.SelectionFont = new Font(txtTrabajosPen.Font.FontFamily, 14, FontStyle.Bold);
                     txtTrabajosPen.AppendText($"REGISTRO {i + 1}:\n\n");
 
                     foreach (string campo in campos)
                     {
-                        // Formatea y agrega cada campo al RichTextBox
+                        // Formatea RichTextBox
                         string[] parts = campo.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
                         if (parts.Length == 2)
@@ -73,13 +70,12 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                         }
                         else
                         {
-                            // Si el campo no sigue el formato clave-valor, se muestra como está
                             txtTrabajosPen.SelectionFont = font;
                             txtTrabajosPen.AppendText($"{campo.Trim()}\n");
                         }
                     }
 
-                    txtTrabajosPen.AppendText("\n\n"); // Línea en blanco para separar registros
+                    txtTrabajosPen.AppendText("\n\n");
                 }
             }
             catch (Exception ex)
@@ -87,44 +83,11 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        
-
-        private void GuardarYBorrarEnArchivo()
-        {
-            // Obtener el contenido del cuadro de texto
-            string contenido = txtTrabajosPen.Text;
-
-            // Ruta del archivo donde se guardará
-            string rutaArchivo = @"C:\Users\Jose Moncayo\Dropbox\Aplicaciones\proyectoconn\hola.txt";
-
-            try
-            {
-                // Guardar el contenido en el archivo
-                System.IO.File.WriteAllText(rutaArchivo, contenido);
-
-               
-
-                MessageBox.Show("Contenido guardado en 'hola.txt'.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Actualizar_Load(object sender, EventArgs e)
-        {
             
-        }
-
-        private void txtTrabajosPen_TextChanged(object sender, EventArgs e)
-        {
-        }
 
         private void btnguardarcambios_Click(object sender, EventArgs e)
         {
-            // Ruta del archivo donde se leerá la información
+            // Ruta del archivo txt
             string rutaArchivo = @"C:\Users\Jose Moncayo\Dropbox\Aplicaciones\proyectoconn\hola.txt";
 
             try
@@ -132,7 +95,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 string contenido = System.IO.File.ReadAllText(rutaArchivo);
                 string[] registros = contenido.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Inicializa la conexión
                 using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
                 {
                     conexion.Open();
@@ -170,7 +132,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             }
                         }
 
-                        // Actualiza la base de datos con la verificación obtenida
+                        // Actualiza con la verificación obtenida
                         ActualizarVerificacion(id, verificacion, conexion);
                     }
                 }
@@ -183,9 +145,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
+
         private void ActualizarVerificacion(int id, string verificacion, MySqlConnection conexion)
         {
-            // Realiza la actualización en la base de datos
+            // Realiza la actualización
             string consulta = "UPDATE gestion_ventas SET verificacion = @verificacion WHERE id = @id";
 
             using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
@@ -197,7 +160,32 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
+        private void GuardarYBorrarEnArchivo()
+        {
+            string contenido = txtTrabajosPen.Text;
 
+            string rutaArchivo = @"C:\Users\Jose Moncayo\Dropbox\Aplicaciones\proyectoconn\hola.txt";
+
+            try
+            {
+                System.IO.File.WriteAllText(rutaArchivo, contenido);
+
+                MessageBox.Show("Contenido guardado en 'hola.txt'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Actualizar_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTrabajosPen_TextChanged(object sender, EventArgs e)
+        {
+        }
 
     }
 }

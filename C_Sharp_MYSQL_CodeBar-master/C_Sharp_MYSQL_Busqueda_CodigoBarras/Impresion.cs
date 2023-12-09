@@ -8,9 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
-//AÑADIR LA REFERENCIA BARCODELIB
 using BarcodeLib;
 using BarcodeStandard;
 using MySql.Data.MySqlClient;
@@ -25,7 +22,7 @@ namespace ProyectoCodigo
             InitializeComponent();
         }
 
-        //1.- CREAR UNA CLASE PARA RELLENAR LOS ITEMS DEL COMBO BOX
+
         public class OpcionCombo
         {
             public int Valor { get; set; }
@@ -34,12 +31,10 @@ namespace ProyectoCodigo
 
         private void Impresion_Load(object sender, EventArgs e)
         {
-            //2.- CARGAR EL COMBO CON LOS TIPO DE BARCODE
+            //Carga el combo con los tipos de barcode
 
 
             cbotipo.Items.Add(new OpcionCombo() { Valor = (int)BarcodeLib.TYPE.CODE128, Texto = "Code 128" });
-
-
             cbotipo.DisplayMember = "Texto";
             cbotipo.ValueMember = "Valor";
             cbotipo.SelectedIndex = 0;
@@ -65,7 +60,6 @@ namespace ProyectoCodigo
                 codigo.LabelPosition = LabelPositions.BOTTOMCENTER;
                 imagenCodigo = codigo.Encode(tipoCodigo, txtcodigo.Text.Trim(), Color.Black, Color.White, 300, 100);
 
-                //EXTRA Y AL ULTIMO
                 Bitmap imagenTitulo = convertirTextoImagen(txttitulo.Text.Trim(), 300, Color.White);
 
                 int alto_imagen_nuevo = imagenCodigo.Height + imagenTitulo.Height;
@@ -76,7 +70,6 @@ namespace ProyectoCodigo
                 dibujar.DrawImage(imagenTitulo, new Point(0, 0));
                 dibujar.DrawImage(imagenCodigo, new Point(0, imagenTitulo.Height));
 
-                // picturecodigo.BackgroundImage = imagenCodigo;
                 picturecodigo.BackgroundImage = imagenNueva;
             }
             catch (Exception ex)
@@ -86,20 +79,19 @@ namespace ProyectoCodigo
         }
 
 
-
         public static Bitmap convertirTextoImagen(string texto, int ancho, Color color)
         {
-            //creamos el objeto imagen Bitmap
             Bitmap objBitmap = new Bitmap(1, 1);
             int Width = 0;
             int Height = 0;
-            //formateamos la fuente (tipo de letra, tamaño)
+
+            //Formatea font
             System.Drawing.Font objFont = new System.Drawing.Font("Arial", 16, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
 
-            //creamos un objeto Graphics a partir del Bitmap
+            //Crea un objeto Graphics a partir del Bitmap
             Graphics objGraphics = Graphics.FromImage(objBitmap);
 
-            //establecemos el tamaño según la longitud del texto
+            //Establece el tamaño según la longitud del texto
             Width = ancho;
             Height = (int)objGraphics.MeasureString(texto, objFont).Height + 5;
             objBitmap = new Bitmap(objBitmap, new Size(Width, Height));
@@ -118,9 +110,9 @@ namespace ProyectoCodigo
             objGraphics.DrawString(texto, objFont, new SolidBrush(Color.Black), new RectangleF(0, (objBitmap.Height / 2) - (objBitmap.Height - 10), objBitmap.Width, objBitmap.Height), drawFormat);
             objGraphics.Flush();
 
-
             return objBitmap;
         }
+
 
         private void btnguardar_Click_1(object sender, EventArgs e)
         {
@@ -144,12 +136,11 @@ namespace ProyectoCodigo
             }
         }
 
+
         private void txtboxDNI1_TextChanged_1(object sender, EventArgs e)
         {
-            // Obtener la cadena de conexión a la base de datos
             string connectionString = "server=localhost;port=3306;user id=root;password=user;database=metaldb;";
 
-            // Crear una conexión a la base de datos
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             try
@@ -157,17 +148,17 @@ namespace ProyectoCodigo
                 conn.Open();
                 string query = "SELECT id, nombres, apellidos FROM cliente WHERE dni = @dni OR ruc = @ruc";
 
-                // Crear un comando SQL con parámetros
+                // Crea un comando SQL con parámetros
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@dni", txtboxDNI1.Text);
                 cmd.Parameters.AddWithValue("@ruc", txtboxDNI1.Text);
 
-                // Ejecutar la consulta SQL y obtener el resultado
+                // Ejecuta la consulta SQL y obtener el resultado
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    // Si se encontró un registro relacionado, asignamos los valores a los TextBox
+                    // Si se encontró un registro relacionado, asigna los valores a los TextBox
                     string nombres = reader["nombres"].ToString();
                     string apellidos = reader["apellidos"].ToString();
                     txttitulo.Text = $"{nombres} {apellidos}";
@@ -175,7 +166,7 @@ namespace ProyectoCodigo
                 }
                 else
                 {
-                    // Si no se encontró un registro relacionado, puedes limpiar los TextBox o mostrar un mensaje de error.
+                    // Si no se encontró un registro relacionado,
                     txttitulo.Text = string.Empty;
                     txtcodigo.Text = string.Empty;
                 }
@@ -191,6 +182,7 @@ namespace ProyectoCodigo
                 conn.Close();
             }
         }
+
 
         private void btnrecargar_Click(object sender, EventArgs e)
         {
@@ -310,5 +302,5 @@ namespace ProyectoCodigo
 
         }
 
-          }
+    }
 }

@@ -1370,6 +1370,7 @@
             this.txtBoxdescu.ForeColor = System.Drawing.Color.White;
             this.txtBoxdescu.Location = new System.Drawing.Point(835, 108);
             this.txtBoxdescu.Name = "txtBoxdescu";
+            this.txtBoxdescu.ReadOnly = true;
             this.txtBoxdescu.Size = new System.Drawing.Size(58, 26);
             this.txtBoxdescu.TabIndex = 122;
             this.txtBoxdescu.Visible = false;

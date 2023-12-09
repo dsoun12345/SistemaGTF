@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using ZXing;
 using ZXing.Mobile;
 using ZXing.Net.Mobile.Forms;
-using System.Collections.Generic; // Agregar esta directiva
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace proyectoconnect
@@ -22,7 +22,7 @@ namespace proyectoconnect
         private List<string> registros = new List<string>();
 
         private const string DropboxAppKey = "5dl2ukw5340uow1";
-        private string DropboxAccessToken = "sl.Bq9SMtGarPdJlaTs3qnOzPtD7uW6ICUJ2gfcnLmdk_cX28saE-iDzMB6QQMl1RkZeTorl7YaNra_BU7wTm98QJmlf7iGT7-QFCzGcBAXthXum1fWssGru9MOiwvM8e0wq7CdDarin_VhtObMrOAQeSg";
+        private string DropboxAccessToken = "sl.BrM4oYEgfmVm33067NXI0QKSyfKIAGUVcbeMsCFSrsjhVDVrmTxVK2muqr2sUr1tHVgmG_mHHoZlCv__9nncL0mcIJIXjAx60myHP0cK_sGP_aOhWxntN5IYt2e3flQn1xI3D_BGW1UV9KFXG_NNYwE";
         public MainPage()
         {
             InitializeComponent();
@@ -47,7 +47,6 @@ namespace proyectoconnect
             // Verificar si la solicitud fue exitosa
             if (response.IsSuccessStatusCode)
             {
-                // Leer y procesar el contenido de la respuesta
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var responseDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
 
@@ -58,15 +57,13 @@ namespace proyectoconnect
                 }
                 else
                 {
-                    // Maneja el caso en el que 'access_token' no está presente en la respuesta
-                    // Puedes registrar un error o lanzar una excepción.
+
                     return null;
                 }
             }
             else
             {
-                // Manejar el caso en que la solicitud no fue exitosa
-                // Puedes registrar un error o lanzar una excepción.
+
                 return null;
             }
         }
@@ -77,7 +74,6 @@ namespace proyectoconnect
             {
                 try
                 {
-                    // Intenta hacer una llamada simple a la API para validar el token de acceso
                     await dbx.Files.ListFolderAsync(string.Empty);
                     return true;
                 }
@@ -95,18 +91,14 @@ namespace proyectoconnect
 
         private async void BuscarDatos_Clicked(object sender, EventArgs e)
         {
-            // Verifica si el token de acceso aún es válido
             var esValido = await ValidarAccessToken();
             if (!esValido)
             {
-                // El token de acceso ha expirado, refrescarlo
                 var accessTokenRefrescado = await RefrescarAccessToken("YPEnzC35Tl4AAAAAAAACi219ZxdkcRsu6JsofUwFbUs");
-                // Actualiza el cliente de Dropbox con el nuevo token de acceso
                 ActualizarClienteDropbox(accessTokenRefrescado);
             }
             string textoBuscado = BusquedaEntry.Text;
 
-            // Realiza la búsqueda en el contenido del archivo hola.txt
             string contenido = await DescargarContenidoDeDropbox();
 
             if (!string.IsNullOrWhiteSpace(contenido))
@@ -122,11 +114,12 @@ namespace proyectoconnect
                     string[] campos = linea.Split(',');
                     foreach (var campo in campos)
                     {
-                        // Puedes ajustar la lógica de búsqueda según tus necesidades
-                        if (campo.Contains(textoBuscado))
+                        
+                        if (ObtenerValorCampo(linea, "Código de Tarjeta") == textoBuscado ||
+                            ObtenerValorCampo(linea, "DNI") == textoBuscado)
                         {
                             lineasEncontradas.Add(linea);
-                            break; // Rompe el bucle para evitar agregar la misma línea más de una vez
+                            break; 
                         }
                     }
                 }
@@ -138,7 +131,7 @@ namespace proyectoconnect
                 {
 
 
-                    // Agregar etiquetas y botones para cada resultado al Grid
+                    // Agrega etiquetas y botones para cada resultado al Grid
                     for (int i = 0; i < lineasEncontradas.Count; i++)
                     {
 
@@ -152,7 +145,7 @@ namespace proyectoconnect
                             {
                                 Spans =
                         {
-                               // Agregar el número de registro como parte del texto utilizando un Span
+                        // Agrega el número de registro como parte del texto utilizando un Span
                             new Span { Text = $"Registro {i + 1}: "+ "\n"+ "\n", FontAttributes = FontAttributes.Bold, ForegroundColor = Color.White, FontSize = 20 },
                             new Span { Text = "ID: ", FontAttributes = FontAttributes.Bold },
                             new Span { Text = ObtenerValorCampo(lineasEncontradas[i], "ID") + "\n"+ "\n" },
@@ -188,20 +181,20 @@ namespace proyectoconnect
                         {
                             Source = "verificar.png",
                             Style = (Style)Resources["ImageButtonStyle"],
-                            CommandParameter = lineasEncontradas[i] // Pasa el registro como parámetro al botón
+                            CommandParameter = lineasEncontradas[i] 
                         };
-                        botonVerificar.Clicked += BotonVerificar_Clicked; // Asocia el manejador de eventos
-                        ResultadoGrid.Children.Add(botonVerificar, 1, i); // Coloca el botón en la columna 1 y la fila i
+                        botonVerificar.Clicked += BotonVerificar_Clicked; 
+                        ResultadoGrid.Children.Add(botonVerificar, 1, i); 
 
                         // Crear botón "Anular" para el registro
                         var botonAnular = new ImageButton
                         {
                             Source = "anular.png",
                             Style = (Style)Resources["ImageButtonStyle"],
-                            CommandParameter = lineasEncontradas[i] // Pasa el registro como parámetro al botón
+                            CommandParameter = lineasEncontradas[i] 
                         };
-                        botonAnular.Clicked += BotonAnular_Clicked; // Asocia el manejador de eventos
-                        ResultadoGrid.Children.Add(botonAnular, 2, i); // Coloca el botón en la columna 2 y la fila i
+                        botonAnular.Clicked += BotonAnular_Clicked;
+                        ResultadoGrid.Children.Add(botonAnular, 2, i);
                     }
                 }
             }
@@ -213,7 +206,7 @@ namespace proyectoconnect
         {
             var botonVerificar = (ImageButton)sender;
 
-            // Verifica si el botón ya está deshabilitado (ya se hizo la verificación)
+            // Verifica si el botón ya está deshabilitado
             if (!botonVerificar.IsEnabled)
             {
                 return;
@@ -224,11 +217,10 @@ namespace proyectoconnect
             // Verifica si el registro ya contiene "ok"
             if (registroVerificar.Contains("ok"))
             {
-                // Si ya contiene "ok", no hagas nada
+                
                 return;
             }
 
-            // Realiza la lógica de verificación aquí y agrega la verificación "ok" al registro
             registroVerificar += "ok";
 
             // Descarga el contenido actual del archivo desde Dropbox
@@ -252,7 +244,6 @@ namespace proyectoconnect
                 lineas[indice] = registroVerificar;
                 // Reconstruye el contenido con los cambios
                 contenido = string.Join(";", lineas);
-                // Sube el contenido actualizado a Dropbox
                 await SubirContenidoADropbox(contenido);
 
                 // Actualiza la etiqueta correspondiente en el Grid
@@ -262,7 +253,6 @@ namespace proyectoconnect
                     label.Text = registroVerificar;
                 }
 
-                // Deshabilita el botón después de la verificación
                 botonVerificar.IsEnabled = false;
             }
             BuscarDatos_Clicked(sender, e);
@@ -272,7 +262,7 @@ namespace proyectoconnect
         {
             var botonAnular = (ImageButton)sender;
 
-            // Verifica si el botón ya está deshabilitado (ya se hizo la anulación)
+            // Verifica si el botón ya está deshabilitado
             if (!botonAnular.IsEnabled)
             {
                 return;
@@ -283,7 +273,6 @@ namespace proyectoconnect
             // Realiza la lógica de anulación aquí y agrega la anulación "" al registro
             registroAnular = registroAnular.Replace("ok", "");
 
-            // Descarga el contenido actual del archivo desde Dropbox
             string contenido = await DescargarContenidoDeDropbox();
 
             // Encuentra el índice del registro original en el contenido
@@ -304,7 +293,6 @@ namespace proyectoconnect
                 lineas[indice] = registroAnular;
                 // Reconstruye el contenido con los cambios
                 contenido = string.Join(";", lineas);
-                // Sube el contenido actualizado a Dropbox
                 await SubirContenidoADropbox(contenido);
 
                 // Actualiza la etiqueta correspondiente en el Grid
@@ -321,7 +309,6 @@ namespace proyectoconnect
                     btnVerificar.IsEnabled = true;
                 }
 
-                // Deshabilita el botón de anular después de la anulación
                 botonAnular.IsEnabled = false;
             }
             BuscarDatos_Clicked(sender, e);
@@ -365,7 +352,6 @@ namespace proyectoconnect
 
         private async void EscanearCodigo_Clicked(object sender, EventArgs e)
         {
-            // Configuración del escáner
             var options = new MobileBarcodeScanningOptions
             {
                 PossibleFormats = new List<BarcodeFormat>
@@ -376,7 +362,6 @@ namespace proyectoconnect
         }
             };
 
-            // Crear la página del escáner
             var scanPage = new ZXingScannerPage(options)
             {
                 DefaultOverlayTopText = "Alinea el código de barras dentro del marco",
@@ -390,21 +375,18 @@ namespace proyectoconnect
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PopAsync();
-                    BusquedaEntry.Text = result.Text; // Mostrar el código en el Entry
+                    BusquedaEntry.Text = result.Text; 
 
-                    // Realizar la búsqueda automáticamente
                     BuscarDatos_Clicked(sender, e);
                 });
             };
 
-            // Mostrar la página del escáner
             await Navigation.PushAsync(scanPage);
         }
         private string ObtenerValorCampo(string linea, string nombreCampo)
         {
             var campos = linea.Split(',');
-
-            // Iterar sobre los campos y buscar el nombre del campo
+ 
             foreach (var campo in campos)
             {
                 var keyValue = campo.Split(':');
@@ -420,7 +402,6 @@ namespace proyectoconnect
                 }
             }
 
-            // Devuelve una cadena vacía si el campo no se encuentra
             return string.Empty;
         }
 

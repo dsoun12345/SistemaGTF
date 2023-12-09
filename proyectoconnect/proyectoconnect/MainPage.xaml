@@ -71,14 +71,12 @@
                     <Button Text="Buscar" Clicked="BuscarDatos_Clicked" Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" Margin="55,10,0,0" />
                 </Grid>
 
-                <!-- ResultadoGrid ahora se encuentra en el StackLayout -->
+                <!-- ResultadoGrid-->
                 <Grid x:Name="ResultadoGrid" Margin="20,40,20,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
-
-                        <!-- Agrega más filas según sea necesario -->
                     </Grid.ColumnDefinitions>
                 </Grid>
             </StackLayout>

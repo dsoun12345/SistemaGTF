@@ -123,6 +123,7 @@
             this.txtcodigo.ForeColor = System.Drawing.Color.White;
             this.txtcodigo.Location = new System.Drawing.Point(61, 302);
             this.txtcodigo.Name = "txtcodigo";
+            this.txtcodigo.ReadOnly = true;
             this.txtcodigo.Size = new System.Drawing.Size(300, 33);
             this.txtcodigo.TabIndex = 13;
             // 
@@ -133,6 +134,7 @@
             this.txttitulo.ForeColor = System.Drawing.Color.White;
             this.txttitulo.Location = new System.Drawing.Point(61, 209);
             this.txttitulo.Name = "txttitulo";
+            this.txttitulo.ReadOnly = true;
             this.txttitulo.Size = new System.Drawing.Size(300, 33);
             this.txttitulo.TabIndex = 12;
             // 

@@ -17,19 +17,16 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 {
     public partial class FechasTrabajo : Form
     {
-        // Agrega tu cadena de conexión a MySQL
         private MySqlConnection conexion;
         private string cadenaConexion = "server=localhost;database=metaldb;user=root;password=user;port=3306;";
 
         public FechasTrabajo()
         {
             InitializeComponent();
-            // Inicializa tu conexión a la base de datos
             conexion = new MySqlConnection(cadenaConexion);
             try
             {
                 conexion.Open();
-                // Maneja la conexión a la base de datos
             }
             catch (MySqlException ex)
             {
@@ -37,9 +34,9 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
+
         private void ObtenerDescripcionesDesdeDB()
         {
-            // Limpiar el cuadro de texto
             txtDescripcion1.Clear();
 
             string codigoDni = txtCodDni.Text;
@@ -52,7 +49,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 return;
             }
 
-            // Verificar que la fecha de inicio sea anterior a la fecha de fin
+            // Verifica que la fecha de inicio sea anterior a la fecha de fin
             if (fechaInicio > fechaFin)
             {
                 MessageBox.Show("La fecha de inicio debe ser anterior a la fecha de fin.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -92,7 +89,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                             string[] datos = desc.Split(',');
                             if (datos.Length >= 6)
                             {
-                                // Construir el registro y agregarlo a la lista
+                                // Construye el registro y lo agrega a la lista
                                 string registro = $"{fechaEntrega.ToShortDateString()},{nomCompletos},{telefono},{datos[0].Trim()},{datos[1].Trim()},{datos[2].Trim()},{datos[3].Trim()},{datos[4].Trim()},{datos[5].Trim()}";
                                 registrosEncontrados.Add(registro);
                             }
@@ -100,14 +97,14 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     }
                 }
 
-                // Verificar si se encontraron registros
+                // Verifica si se encontran registros
                 if (registrosEncontrados.Count == 0)
                 {
                     MessageBox.Show("No se encontraron registros en el rango de fechas especificado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Mostrar los resultados en el RichTextBox
+                // Muestra los resultados en el RichTextBox
                 FormatearRichTextBox(registrosEncontrados.ToArray());
             }
             catch (MySqlException ex)
@@ -116,26 +113,25 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
+
         private void FormatearRichTextBox(string[] registros)
         {
-            // Configurar el formato del contenido antes del bucle
+            // Configura el formato del contenido
             txtDescripcion1.SelectionFont = new Font("Courier New", 12, FontStyle.Regular);
 
-            int numeroRegistro = 1; // Inicializar el número de registro
+            int numeroRegistro = 1;
 
             foreach (var registro in registros)
             {
                 string[] campos = registro.Split(',');
-                if (campos.Length >= 8) // Actualizado para reflejar la inclusión de nom_completos y telefono
+                if (campos.Length >= 8)
                 {
-                    // Agregar título del registro
+                    // Agrega título del registro
                     txtDescripcion1.SelectionFont = new Font("Century Gothic", 14, FontStyle.Bold);
                     txtDescripcion1.AppendText($"Registro {numeroRegistro}:\n");
                     numeroRegistro++;
 
-                    // Configurar el formato del contenido
                     txtDescripcion1.SelectionFont = new Font("Courier New", 12, FontStyle.Regular);
-
                     txtDescripcion1.AppendText($"Fecha de Entrega: {campos[0].Trim()}\n");
                     txtDescripcion1.AppendText($"Nom Completos: {campos[1].Trim()}\n");
                     txtDescripcion1.AppendText($"Teléfono: {campos[2].Trim()}\n");
@@ -148,7 +144,22 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                     txtDescripcion1.AppendText("\n\n");
                 }
             }
+        }
 
+
+        private void FechasTrabajo_Load(object sender, EventArgs e)
+        {
+            txtCodDni.Focus();
+        }
+
+
+        private void btnguardar0_Click(object sender, EventArgs e)
+        {
+            ObtenerDescripcionesDesdeDB();
+            txtCodDni.Clear();
+            txtFecIni.Clear();
+            txtFecFin.Clear();
+            txtCodDni.Focus();
         }
 
         private void FechasTrabajo_FormClosing(object sender, FormClosingEventArgs e)
@@ -159,21 +170,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             }
         }
 
-        private void FechasTrabajo_Load(object sender, EventArgs e)
-        {
-            txtCodDni.Focus();
-
-        }
-
-        private void btnguardar0_Click(object sender, EventArgs e)
-        {
-            ObtenerDescripcionesDesdeDB();
-            txtCodDni.Clear();
-            txtFecIni.Clear();
-            txtFecFin.Clear();
-            txtCodDni.Focus();
-
-        }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {

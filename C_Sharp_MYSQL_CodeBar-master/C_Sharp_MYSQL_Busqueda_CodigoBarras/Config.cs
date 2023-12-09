@@ -33,13 +33,13 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private void btnguard1_Click(object sender, EventArgs e)
         {
-            // Obtener el valor del IGV desde el TextBox
+            // Obtiene el valor del IGV desde el TextBox
             decimal igvValue;
             decimal punto100Value;
             string inputValueIGV = txtigv1.Text;
             string inputValuePunto = txtpunto100.Text;
 
-            // Reemplazar la coma (,) por punto (.) si está presente
+            // Reemplaza la coma (,) por punto (.) si está presente
             inputValueIGV = inputValueIGV.Replace(',', '.');
             inputValuePunto = inputValuePunto.Replace(',', '.');
 
@@ -48,16 +48,16 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 Conexion objConexion = new Conexion();
                 MySqlConnection conn = objConexion.establecerConexion();
 
-                // Verificar si al menos uno de los cuadros de texto tiene un valor numérico válido
+                // Verifica si al menos uno de los cuadros de texto tiene un valor numérico válido
                 if (!decimal.TryParse(inputValueIGV, NumberStyles.Any, CultureInfo.InvariantCulture, out igvValue) &&
                     !decimal.TryParse(inputValuePunto, NumberStyles.Any, CultureInfo.InvariantCulture, out punto100Value))
                 {
                     MessageBox.Show("Por favor, ingresa caracteres válidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     objConexion.cerrarConexion();
-                    return; // Salir del método si ambas entradas no son válidas
+                    return; 
                 }
 
-                // Obtén el valor actual de la configuración
+                // Obtiene el valor actual de la configuración
                 decimal igvActual = 0;
                 decimal punto100Actual = 0;
 
@@ -88,7 +88,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 else
                 {
-                    insertCmd.Parameters.AddWithValue("@igv", igvActual); // Mantén el valor actual si no se proporciona uno nuevo
+                    insertCmd.Parameters.AddWithValue("@igv", igvActual); 
                 }
 
                 if (decimal.TryParse(inputValuePunto, NumberStyles.Any, CultureInfo.InvariantCulture, out punto100Value))
@@ -97,7 +97,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 else
                 {
-                    insertCmd.Parameters.AddWithValue("@valorPuntos", punto100Actual); // Mantén el valor actual si no se proporciona uno nuevo
+                    insertCmd.Parameters.AddWithValue("@valorPuntos", punto100Actual);
                 }
 
                 int insertRowsAffected = insertCmd.ExecuteNonQuery();
@@ -141,8 +141,8 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 }
                 else
                 {
-                    txtigvbd.Text = ""; // Si no hay registros en la tabla configuracion
-                    txtpuntosvalor.Text = ""; // También establece el campo de puntos en blanco si no hay registros
+                    txtigvbd.Text = ""; 
+                    txtpuntosvalor.Text = ""; 
                 }
 
                 reader.Close();
@@ -162,7 +162,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 Conexion objConexion = new Conexion();
                 MySqlConnection conn = objConexion.establecerConexion();
 
-                // Define la consulta SQL para eliminar todas las filas de la tabla configuracion
+                // Consulta SQL para eliminar todas las filas de la tabla configuracion
                 string sql = "DELETE FROM configuracion";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -179,7 +179,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
                 objConexion.cerrarConexion();
 
-                // Actualiza el TextBox con el valor actualizado o vacío si no hay registros
                 CargarUltimoValores();
                 txtpunto100.Clear();
                 txtigv1.Clear();

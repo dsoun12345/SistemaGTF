@@ -18,7 +18,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             InitializeComponent();
             Clases.Crud objtabla = new Clases.Crud();
             objtabla.mostrar(dataGridView1);
-            // Bloquear el TextBox (puedes elegir mantener o quitar una de estas líneas)
             txtID1.ReadOnly = true;
             dataGridView1.DataBindingComplete += dataGridView1_DataBindingComplete;
         }
@@ -32,11 +31,11 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             Clases.Crud objtabla = new Clases.Crud();
 
-            // Verificar si el campo ID no está vacío
+            // Verifica si el campo ID no está vacío
             if (!string.IsNullOrWhiteSpace(txtID1.Text))
             {
                 MessageBox.Show("Por favor, deja el campo ID vacío al agregar un nuevo registro.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Salir de la función sin ejecutar la inserción
+                return;
             }
 
             // Verificar si algún campo de entrada está vacío
@@ -44,10 +43,10 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
                 string.IsNullOrWhiteSpace(txtNombreC1.Text) || string.IsNullOrWhiteSpace(txtApellidoC1.Text) /* Agrega más campos aquí */)
             {
                 MessageBox.Show("Por favor, ingresa datos en todos los campos antes de agregar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Salir de la función sin ejecutar la inserción
+                return;
             }
 
-            // Validar que solo se ingresen letras y espacios en los campos de nombres y apellidos
+            // Valida que solo se ingresen caracteres válidos en los campos de nombres y apellidos
             if (!ValidarTexto(txtNombreC1.Text) || !ValidarTexto(txtApellidoC1.Text))
             {
                 MessageBox.Show("Por favor, ingrese caracteres válidos en los campos de nombres y apellidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -77,15 +76,15 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             Clases.Crud objtabla = new Clases.Crud();
 
-            // Verificar si algún campo de entrada está vacío
+            // Verifica si algún campo de entrada está vacío
             if (string.IsNullOrWhiteSpace(txtID1.Text) || string.IsNullOrWhiteSpace(txtdni2.Text) ||
-                string.IsNullOrWhiteSpace(txtNombreC1.Text) || string.IsNullOrWhiteSpace(txtApellidoC1.Text) /* Agrega más campos aquí */)
+                string.IsNullOrWhiteSpace(txtNombreC1.Text) || string.IsNullOrWhiteSpace(txtApellidoC1.Text))
             {
                 MessageBox.Show("Por favor, selecciona un usuario antes de intentar modificarlo.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Salir de la función sin ejecutar la modificación
+                return; 
             }
 
-            // Validar que solo se ingresen letras y espacios en los campos de nombres y apellidos
+            // Validar que solo se caracteres válidos en los campos de nombres y apellidos
             if (!ValidarTexto(txtNombreC1.Text) || !ValidarTexto(txtApellidoC1.Text))
             {
                 MessageBox.Show("Por favor, ingrese caracteres válidos en los campos de nombres y apellidos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -113,7 +112,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             if (string.IsNullOrWhiteSpace(txtID1.Text))
             {
                 MessageBox.Show("Por favor, selecciona un usuario antes de intentar eliminarlo.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Salir de la función sin ejecutar la eliminación
+                return; 
             }
 
             objtabla.eliminar(txtID1);
@@ -148,48 +147,48 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
             {
                 if (column.HeaderCell != null)
                 {
-                    string headerText = column.HeaderText.ToLower(); // Convertir el encabezado a minúsculas
+                    string headerText = column.HeaderText.ToLower();
 
                     // Cambiar el encabezado de la columna a mayúsculas
                     column.HeaderCell.Value = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(headerText);
 
-                    // Establecer el ancho deseado para todas las columnas en píxeles
+                    // Establecer el ancho 
                     
                     if (column.Name == "id")
                     {
-                        column.Width = 55; // Ancho deseado para la columna "ID" en píxeles
+                        column.Width = 55;
                     }
                     else if (column.Name == "dni")
                     {
-                        column.Width = 85; // Ancho deseado para la columna "DNI" en píxeles
+                        column.Width = 85;
                     }
                     else if (column.Name == "ruc")
                     {
-                        column.Width = 110; // Ancho deseado para la columna "DNI" en píxeles
+                        column.Width = 110;
                     }
                     else if (column.Name == "nombres")
                     {
-                        column.Width = 205; // Ancho deseado para la columna "RUC" en píxeles
+                        column.Width = 205;
                     }
                     else if (column.Name == "apellidos")
                     {
-                        column.Width = 200; // Ancho deseado para la columna "RUC" en píxeles
+                        column.Width = 200;
                     }
                     else if (column.Name == "telefono")
                     {
-                        column.Width = 90; // Ancho deseado para la columna "RUC" en píxeles
+                        column.Width = 90;
                     }
                     else if (column.Name == "razon_social")
                     {
-                        column.Width = 290; // Ancho deseado para la columna "RUC" en píxeles
+                        column.Width = 290;
                     }
                     else if (column.Name == "direccion")
                     {
-                        column.Width = 290; // Ancho deseado para la columna "direccion" en píxeles
+                        column.Width = 290;
                     }
                     else
                     {
-                        column.Width = 200; // Ancho deseado para otras columnas en píxeles
+                        column.Width = 200;
                     }
                 }
             }
@@ -202,7 +201,7 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
 
         private bool ValidarTexto(string texto)
         {
-            // Verificar que el texto solo contenga letras y espacios
+            // Verifica que el texto solo contenga letras y espacios
             return texto.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
         }
 
@@ -210,7 +209,6 @@ namespace C_Sharp_MYSQL_Busqueda_CodigoBarras
         {
             if (e.RowIndex == -1 && e.Value != null)
             {
-                // Verificar si estamos formateando la fila de encabezados (-1) y el valor no es nulo
                 e.Value = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(e.Value.ToString().ToLower());
                 e.FormattingApplied = true;
             }
